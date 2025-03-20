@@ -121,7 +121,7 @@ function ThemeChange() {
         </div>
   
         {/* Navigation Buttons */}
-        <div className="element_buttons">
+        <div className="element_buttons" id="navbut">
           <button
             className={`navbutt ${slideIndex === 0 ? 'active' : ''}`}
             onClick={() => buttSlide(0)}
