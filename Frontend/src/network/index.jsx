@@ -2,10 +2,8 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import React, { useState, useEffect } from 'react';
 import '../styles/calc.css'
-import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
-import { useState, useEffect } from 'react';
 
 function ThemeChange() {
     const [i, changei] = useState(0);

@@ -51,13 +51,14 @@ body {
 /* Бутоните в менюто */
 .menu-item {
     display: block;
-    background: none;
     border: none;
     color: white;
     font-size: 16px;
     padding: 10px 0;
     text-align: left;
     cursor: pointer;
+    background-color: #555;
+
 }
 
 .menu-item:hover {
@@ -108,7 +109,7 @@ header {
 }
 
 /* Стилове за бутоните в дясната част */
-.header-right button {
+.header-right {
     margin-left: 0.3125rem; /* 5px / 16 = 0.3125rem (намалено разстояние) */
     padding: 0.5rem 1rem; /* 8px 16px / 16 = 0.5rem 1rem */
     font-size: 1rem; /* 16px / 16 = 1rem */
