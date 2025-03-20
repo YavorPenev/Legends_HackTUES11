@@ -29,7 +29,7 @@ function CalcPage(){
                 <h2>Enter your loan details:</h2>
                 <div>
                     <input type="number" id="loanfield" placeholder="Loan Amount..." />
-                    <input type="number" id="interestfield" placeholder="Yearly Interest Rate..."/>
+                    <input type="number" id="interestfield" placeholder="Yearly Interest Rate ..."/>
                     <input type="number" id="monthsfield" placeholder="Months of Payment..."/>
                 </div>
                 <div>

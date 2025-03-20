@@ -20,6 +20,7 @@ function ThemeChange() {
         // Update buttons
         const buttons = document.getElementsByClassName("main_buttons");
         const elemButt = document.getElementsByClassName("element_buttons");
+        const navButts = document.getElementsByClassName("navbutt"); // Add navbutt buttons
         const elements = document.getElementsByClassName("element");
 
         for (let button of buttons) {
@@ -29,6 +30,11 @@ function ThemeChange() {
 
         for (let button of elemButt) {
             button.classList.remove(...elementButtonThemes);
+            button.classList.add(elementButtonThemes[index]);
+        }
+
+        for (let button of navButts) {
+            button.classList.remove(...elementButtonThemes); // Use the same theme array
             button.classList.add(elementButtonThemes[index]);
         }
 
@@ -137,23 +143,35 @@ function Carousel() {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="element_buttons" id="navbut">
+            <div className="navbuttons" id="navbut">
                 <button
-                    className={`navbutt ${slideIndex === 0 ? 'active' : ''}`}
+                    id='navbutt'
+                    className={`element_buttons ${slideIndex === 0 ? 'active' : ''}`}
                     onClick={() => buttSlide(0)}
-                />
+                >
+                    <p>&nbsp;</p>
+                </button>
                 <button
-                    className={`navbutt ${slideIndex === 1 ? 'active' : ''}`}
+                    id='navbutt'
+                    className={`element_buttons ${slideIndex === 1 ? 'active' : ''}`}
                     onClick={() => buttSlide(1)}
-                />
+                >
+                    <p>&nbsp;</p>
+                </button>
                 <button
-                    className={`navbutt ${slideIndex === 2 ? 'active' : ''}`}
+                    id='navbutt'
+                    className={`element_buttons ${slideIndex === 2 ? 'active' : ''}`}
                     onClick={() => buttSlide(2)}
-                />
+                >
+                    <p>&nbsp;</p>
+                </button>
                 <button
-                    className={`navbutt ${slideIndex === 3 ? 'active' : ''}`}
+                    id='navbutt'
+                    className={`element_buttons ${slideIndex === 3 ? 'active' : ''}`}
                     onClick={() => buttSlide(3)}
-                />
+                >
+                    <p>&nbsp;</p>
+                </button>
             </div>
 
             {/* Navigation Arrows */}

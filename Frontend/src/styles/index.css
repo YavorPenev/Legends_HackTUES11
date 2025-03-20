@@ -44,6 +44,8 @@ body {
 
 #buttonlink {
     text-decoration: none;
+    height: 100%;
+    width: 100%;
 }
 
 .menu-content {
@@ -305,22 +307,24 @@ header {
     gap: 1%;
   }
   
-  .navbutt {
-    background-color: rgba(69, 69, 69, 0.321);
+  #navbutt {
+    background-color: var(--button-bg-color, #ccc); /* Default color */
+    color: var(--button-text-color, #000); /* Default text color */
     border: none;
     border-radius: 50%;
     width: 20px;
     height: 20px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
     cursor: pointer;
   }
   
-  .navbutt:hover {
+  #navbutt:hover {
     background-color: rgba(69, 69, 69, 0.786);
   }
   
-  .navbutt.active {
-    background-color: rgba(69, 69, 69, 0.786);
+  #navbutt.active {
+    background-color: var(--button-active-bg-color, rgba(69, 69, 69, 0.786));
+    color: var(--button-active-text-color, #fff);
   }
 #themebutton
 {

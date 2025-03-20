@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import '../styles/calc.css'
+import '../styles/calculator.css'
 import React from 'react'
 import CalcPage from './Calculator.jsx'
 
