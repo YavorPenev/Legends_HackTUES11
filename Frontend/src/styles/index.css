@@ -179,11 +179,12 @@ header {
 }
 
 #carousel-box {
-    width: 50%;
+    width: 40%;
     /* Ограничете ширината на карусела */
     margin: 0 auto;
     /* Центрирайте карусела */
     position: relative;
+    margin-top: 3%;
 }
 
 .slide {
