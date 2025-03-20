@@ -174,34 +174,28 @@ header {
     /* 16px / 16 = 1rem */
 }
 
-#carousel {
-    margin-top: 5%;
+#carousel-box {
+    width: 60%; /* Ограничете ширината на карусела */
+    margin: 0 auto; /* Центрирайте карусела */
+    margin-top: 3%;
+    position: relative; /* Уверете се, че позиционирането е правилно */
+  }
+  
+  #carousel {
+    width: 100%; /* Уверете се, че каруселът заема цялата ширина на кутията */
     border-radius: 10px;
     overflow: hidden;
     position: relative;
     aspect-ratio: 16/10;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-    margin-left: 25%;
-    margin-right: 25%;
-    width: 50%;
-    max-width: 1200px;
     margin-bottom: 50px;
-}
-
-#carousel-box {
-    width: 40%;
-    /* Ограничете ширината на карусела */
-    margin: 0 auto;
-    /* Центрирайте карусела */
-    position: relative;
-    margin-top: 3%;
-}
-
-.slide {
+  }
+  
+  .slide {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 64%;
+    width: 100%; /* Уверете се, че слайдовете заемат цялата ширина на карусела */
     height: max-content;
     font-size: 1rem;
     font-weight: bold;
@@ -210,36 +204,33 @@ header {
     position: absolute;
     transform: translateX(100%);
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    padding-left: 18%;
-    padding-right: 18%;
-    padding-bottom: 10%;
-    padding-top: 3%;
-}
-
-.slide.active {
+    padding: 3% 18% 10% 18%; /* Използвайте проценти за отстоянията */
+  }
+  
+  .slide.active {
     opacity: 1;
     transform: translateX(0);
-}
-
-.slide.inactive {
+  }
+  
+  .slide.inactive {
     opacity: 0;
     transform: translateX(-100%);
-}
-
-.infoContainer {
+  }
+  
+  .infoContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     gap: 8%;
-}
-
-.carHeader {
+  }
+  
+  .carHeader {
     margin: 0px;
-}
-
-#prev,
-#next {
+  }
+  
+  #prev,
+  #next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -251,47 +242,33 @@ header {
     border-radius: 15%;
     height: 60px;
     width: 60px;
-}
-
-#prev {
+  }
+  
+  #prev {
     left: 5%;
-}
-
-#next {
+  }
+  
+  #next {
     right: 5%;
-}
-
-#prev:hover,
-#next:hover {
+  }
+  
+  #prev:hover,
+  #next:hover {
     background-color: gray;
     transform: translateY(-50%) scale(1.1);
     transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.box-navbutt {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 15px;
-    justify-content: center;
-    position: absolute;
-    bottom: 3%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-}
-
-#navbut {
+  }
+  
+  #navbut {
     display: flex;
     justify-content: center;
     position: absolute;
-    bottom: 10px;
-    /* Позиционирайте точките отдолу */
+    bottom: 10px; /* Позиционирайте точките отдолу */
     width: 100%;
     gap: 1%;
-}
-
-.navbutt {
+  }
+  
+  .navbutt {
     background-color: rgba(69, 69, 69, 0.321);
     border: none;
     border-radius: 50%;
@@ -299,20 +276,15 @@ header {
     height: 20px;
     transition: background-color 0.3s ease;
     cursor: pointer;
-}
-
-.navbutt:hover {
+  }
+  
+  .navbutt:hover {
     background-color: rgba(69, 69, 69, 0.786);
-}
-
-.navbutt.active {
+  }
+  
+  .navbutt.active {
     background-color: rgba(69, 69, 69, 0.786);
-}
-
-.navbutt.active {
-    background-color: rgba(69, 69, 69, 0.786);
-}
-
+  }
 #themebutton
 {
     border: none;
