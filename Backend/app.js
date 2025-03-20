@@ -3,6 +3,10 @@ const express = require("express");
 const mysql = require("mysql2");
 const bcrypt = require("bcrypt");
 const path = require("path");
+const { OpenAI } = require('openai');
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+})
 
 const router = express.Router();
 
@@ -17,6 +21,12 @@ db.connect((err) => {
     if (err) throw err;
     console.log("Connected to MySQL");
 });
+
+async function getFinancialAdvice{
+    try{
+        
+    }
+}
 
 router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "Frontend", "public", "index.html"), (err) => {
@@ -35,6 +45,16 @@ router.get("/signup", (req, res) => {
         }
     });
 });
+
+router.get("/signup1", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "signup1.html"), (err) => {
+        if (err) {
+            console.error("Error loading signup1.html:", err);
+            res.status(500).json({ error: "Internal Server Error: Unable to load signup1.html" });
+        }
+    });
+});
+
 
 router.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "Frontend", "public", "login.html"), (err) => {
@@ -57,6 +77,31 @@ router.post("/signup", async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        db.query(sql, [username, hashedPassword], (err, result) => {
+            if (err) {
+                console.error("Database error:", err);
+                return res.status(400).json({ error: "Username already exists." });
+            }
+
+            res.status(200).json({ message: "Signup successful!" });
+        });
+    } catch (err) {
+        console.error("Error during signup:", err);
+        res.status(500).json({ error: "An error occurred. Please try again." });
+    }
+});
+
+router.post("/signup1", async (req, res) => {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        return res.status(400).json({ error: "All fields are required." });
+    }
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const sql = "INSERT INTO users (email) VALUES (?)";
         db.query(sql, [username, hashedPassword], (err, result) => {
             if (err) {
                 console.error("Database error:", err);
