@@ -58,12 +58,20 @@ function ThemeChange() {
       </div>
     );
   }
-  
+
+
+
 
 
 createRoot(document.getElementById('rootmain')).render(
     <StrictMode>
         <ThemeChange/>      
+    </StrictMode>
+  )
+
+createRoot(document.getElementById('carousel-box')).render(
+    <StrictMode>
+        <Carousel/>
     </StrictMode>
   )
   
