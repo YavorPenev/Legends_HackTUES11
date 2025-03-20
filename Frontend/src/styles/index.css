@@ -35,6 +35,11 @@ body {
     left: 0; /* Slide into view */
 }
 
+#buttonlink
+{
+    text-decoration: none;
+}
+
 .menu-content {
     padding: 20px;
     display: flex;
@@ -64,11 +69,13 @@ body {
     display: block;
     background: none;
     border: none;
-    color: white;
     font-size: 16px;
     padding: 10px 0;
     text-align: left;
     cursor: pointer;
+    width: 80%;
+    border-radius: 10px;
+    transform: background-color 0.3s ease;
 }
 
 .menu-item:hover {
