@@ -1,5 +1,5 @@
 document.getElementById('signup-btn').addEventListener('click', async () => {
-    const username = document.getElementById('username').value;
+    const username = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
     if (!username || !password) {
