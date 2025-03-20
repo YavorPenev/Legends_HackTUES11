@@ -140,7 +140,7 @@ router.post("/login", async (req, res) => {
 });
 
 const nodemailer = require('nodemailer');
-require ('dotenv').confiig();
+require ('dotenv').config();
 
 const transporter = nodemailer.createTransport({
     service: 'gimail',
@@ -156,7 +156,7 @@ const transporter = nodemailer.createTransport({
   const mailOptions = {
     from:{
         name: 'Legends',
-        address: process.env.USER,
+        address: "legendtues11@gmail.com",
     },
     to: process.env.USER,
     subject: "Verification",
