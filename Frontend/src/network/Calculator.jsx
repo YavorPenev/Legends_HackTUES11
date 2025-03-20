@@ -34,14 +34,14 @@ function CalcPage(){
                 </div>
                 <div>
                     <h3>Your monthly payment:</h3>
-                    <h4 id="paymentfield">{payment}</h4>
                     <button onClick={loanChange}>Calculate</button>
+                    <h4 id="paymentfield">{payment}</h4>                    
                 </div>
                 
 
             </div>
         </div>
-    )
+    );
 }
 
 export default CalcPage;
