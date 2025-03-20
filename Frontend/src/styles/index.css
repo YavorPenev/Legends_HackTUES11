@@ -249,6 +249,7 @@ header {
     position: absolute;
     bottom: 10px; /* Позиционирайте точките отдолу */
     width: 100%;
+    gap: 1%;
   }
 
 .navbutt {
@@ -276,7 +277,9 @@ header {
 
 
 
-
+.element{
+    width: 60%;
+}
 
 
 
