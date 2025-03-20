@@ -7,11 +7,34 @@
     <script type="module" src="../src/network/Portfolio.jsx"></script>
   </head>
   <body>
-    <input type="goals" id="goalsbox" placeholder="Enter your goals">
-    <input type="text" id="incomebox" placeholder="Enter your monthly income">
-    <input type="text" id="expensesbox" placeholder="Enter your monthly expenses">
-    <div id="root"></div>
+    <div class = "form" id = "finance-form">
+      <input type="text" id="goals" placeholder="Enter your goals", required>
+      <input type="number" id="income" placeholder="Enter your monthly income", required>
+      <input type="number" id="expenses" placeholder="Enter your monthly expenses", required>
+      <div id="root"></div>
+      <button type = "button">Get an answer</button>
+    </div>  
+    
+    <script>
+      document.getElementById('finance-form').addEventListener('submit', async function(e) {
+          e.preventDefault();
+          const income = document.getElementById('income').value;
+          const expenses = document.getElementById('expenses').value;
+          const goals = document.getElementById('goals').value;
+          const response = await fetch('/api/financial-advice', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  income: income,
+                  expenses: expenses,
+                  goals: goals
+              })
+          });
+          const data = await response.json();
+          document.getElementById('result').innerHTML = `<h2>Recommended Strategy</h2><p>${data.advice}</p>`;
+      });
+  </script>
   </body>
 </html>
-
-income/expenses/

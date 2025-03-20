@@ -3,6 +3,10 @@ const express = require("express");
 const mysql = require("mysql2");
 const bcrypt = require("bcrypt");
 const path = require("path");
+const { OpenAI } = require('openai');
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+})
 
 const router = express.Router();
 
@@ -17,6 +21,12 @@ db.connect((err) => {
     if (err) throw err;
     console.log("Connected to MySQL");
 });
+
+async function getFinancialAdvice{
+    try{
+        
+    }
+}
 
 router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "Frontend", "public", "index.html"), (err) => {
