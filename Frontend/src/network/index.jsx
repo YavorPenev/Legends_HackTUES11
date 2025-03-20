@@ -10,10 +10,10 @@ function ThemeChange() {
     const [i2, changei2] = useState(0);
     const [indexElement, changeElement] = useState(0);
   
-    const backgroundThemes = ["blueBackground", "whiteBackground", "purpleBackground"]; //Add purple background
-    const buttonThemes = ["whiteButton", "blueButton", "blueButton"];
-    const elementButtonThemes = ["blueButton", "whiteButton", "purpleButton"]; //Add purpleButton
-    const elementThemes = ["whiteElement", "blueElement", "blueElement"];
+    const backgroundThemes = ["blueBackground", "whiteBackground", "purpleBackground"]; //body - no pipare
+    const buttonThemes = ["whiteButton", "blueButton", "blueButton"]; // main_buttons
+    const elementButtonThemes = ["blueButton", "whiteButton", "purpleButton"]; // element_buttons
+    const elementThemes = ["whiteElement", "blueElement", "blueElement"]; //element
   
     const applyTheme = (index) => {
       document.body.classList.remove(...backgroundThemes);

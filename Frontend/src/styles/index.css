@@ -12,6 +12,12 @@ body {
     border-radius: 5px;
 }
 
+#side-menu-button
+{
+    border: none;
+    border-radius: 10px;
+}
+
 /* Side menu styles */
 .side-menu {
     position: fixed;
@@ -31,6 +37,11 @@ body {
 
 .menu-content {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
 }
 
 /* Бутон за затваряне */
@@ -51,14 +62,13 @@ body {
 /* Бутоните в менюто */
 .menu-item {
     display: block;
+    background: none;
     border: none;
     color: white;
     font-size: 16px;
     padding: 10px 0;
     text-align: left;
     cursor: pointer;
-    background-color: #555;
-
 }
 
 .menu-item:hover {
@@ -109,7 +119,7 @@ header {
 }
 
 /* Стилове за бутоните в дясната част */
-.header-right {
+.header-right .menu-item {
     margin-left: 0.3125rem; /* 5px / 16 = 0.3125rem (намалено разстояние) */
     padding: 0.5rem 1rem; /* 8px 16px / 16 = 0.5rem 1rem */
     font-size: 1rem; /* 16px / 16 = 1rem */
@@ -209,40 +219,6 @@ header {
     background-color: gray;
     transform: translateY(-50%) scale(1.1);
     transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.box-navbutt {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 15px;
-    justify-content: center;
-    position: absolute;
-    bottom: 3%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-}
-
-.navbutt {
-    background-color: rgba(69, 69, 69, 0.321);
-    border: none;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    transition: background-color 0.3s ease;
-}
-
-.navbutt:hover {
-    background-color: rgba(69, 69, 69, 0.786);
-}
-
-.navbutt.active {
-    background-color: rgba(69, 69, 69, 0.786);
-}
-
-.navbutt.active {
-    background-color: rgba(69, 69, 69, 0.786);
 }
 
 
