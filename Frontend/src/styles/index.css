@@ -22,8 +22,8 @@ body {
 #side-menu {
     position: fixed;
     top: 0;
-    left: -200px; /* Initially hidden */
-    width: 200px;
+    left: -250px; /* Hidden by default */
+    width: 250px;
     height: 100%;
     background-color: #333;
     color: white;
@@ -42,11 +42,6 @@ body {
 
 .menu-content {
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    align-content: center;
 }
 
 /* Бутон за затваряне */
@@ -68,8 +63,9 @@ body {
 /* Бутоните в менюто */
 .menu-item {
     display: block;
-    background: #555;
+    background: none;
     border: none;
+    color: white;
     font-size: 16px;
     padding: 10px 0;
     text-align: left;
