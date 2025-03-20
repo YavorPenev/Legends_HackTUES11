@@ -10,13 +10,13 @@
 </head>
 
 <body>
-    <header>
+    <header class="element">
         <div class="header-left">
             <!-- Бутон за отваряне на менюто -->
-            <button class="menu-button" onclick="toggleMenu()">☰ Menu</button>
+            <button id="menu-button" class = "element_buttons" onclick="toggleMenu()">☰ Menu</button>
 
             <!-- Страничното меню -->
-            <div id="sideMenu" class="side-menu">
+            <div class="element" id="side-menu">
                 <button class="close-button" onclick="toggleMenu()">✖</button>
                 <div class="menu-content">
                     <button class="menu-item" class="element_buttons"><a id="buttonlink">Loan Calculator</a></button>
@@ -28,11 +28,11 @@
 
             <script>
                 function toggleMenu() {
-                    const menu = document.getElementById("sideMenu");
-                    if (menu.classList.contains("open")) {
-                        menu.classList.remove("open"); // Hide the menu
+                    const menu = document.getElementById("side-menu");
+                    if (menu.elementList.contains("open")) {
+                        menu.elementList.remove("open"); // Hide the menu
                     } else {
-                        menu.classList.add("open"); // Show the menu
+                        menu.elementList.add("open"); // Show the menu
                     }
                 }
             </script>
