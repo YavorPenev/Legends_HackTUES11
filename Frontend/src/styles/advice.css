@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    
+}
+
+.container{
+    margin-top: 10%;
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    max-width: 80%;
+}
+
+.cont-elem{
+    width:80%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    height: 90%;
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: 2rem;
+    color: #2c3e50;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #34495e;
+}
+
+input[type="number"],
+input[type="text"] {
+    width: 150%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    width: 73%;
+    margin-top: 3%;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+h3 {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #2c3e50;
+}
+
+pre {
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 600px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+#investmentAdvice{
+    width: 40%;
+    margin-left: -4%;
+    
+}
+
+#inv2{
+    margin-left: -15%;
+}
+
+
+
+#income{
+    width: 70%;
+}
+
+#expenses{
+    width: 70%;
+}
+
+#goals{
+    width: 70%
+}
