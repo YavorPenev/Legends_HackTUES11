@@ -42,6 +42,9 @@ body {
 
 .menu-content {
     padding: 20px;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Бутон за затваряне */
@@ -270,16 +273,14 @@ header {
     background-color: rgba(69, 69, 69, 0.786);
 }
 
-
-
-
-.element{
-    width: 60%;
+#themebutton
+{
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
 }
-
-
-
-
 
 
 

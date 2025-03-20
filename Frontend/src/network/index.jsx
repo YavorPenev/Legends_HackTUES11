@@ -50,7 +50,7 @@ function ThemeChange() {
 
     return (
       <div id='themebox'>
-        <button className="main_buttons" id='themebutton' onClick={CycleTheme}>
+        <button className="element_buttons" id='themebutton' onClick={CycleTheme}>
           <FontAwesomeIcon icon={faCircleHalfStroke} />
         </button>
       </div>
@@ -153,7 +153,7 @@ function ThemeChange() {
 
 createRoot(document.getElementById('rootmain')).render(
     <StrictMode>
-        <ThemeChange/>      
+        <ThemeChange/>
     </StrictMode>
   )
 
