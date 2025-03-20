@@ -6,7 +6,7 @@ const path = require("path");
 const axios = require("axios");
 const { OpenAI } = require("openai");
 
-const ALPHA_VANTAGE_API_KEY = ALPHA_API_KEY;
+const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_API_KEY;
 const BASE_URL = "https://www.alphavantage.co/query";
 
 const openai = new OpenAI({
