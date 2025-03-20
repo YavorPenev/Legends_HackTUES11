@@ -139,9 +139,6 @@ router.post("/login", async (req, res) => {
         res.status(500).json({ error: "An error occurred. Please try again." });
     }
 });
- 
-const nodemailer = require('nodemailer');
-require ('dotenv').config();
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -149,7 +146,7 @@ const transporter = nodemailer.createTransport({
     port: 587,
     secure: false,
     auth: {
-      user: process.env.EMAIL,
+      user: process.env.USER,
       pass: process.env.APP_PASS,
     },
   });
