@@ -22,12 +22,6 @@ db.connect((err) => {
     console.log("Connected to MySQL");
 });
 
-async function getFinancialAdvice{
-    try{
-        
-    }
-}
-
 router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "Frontend", "public", "index.html"), (err) => {
         if (err) {
@@ -145,6 +139,41 @@ router.post("/login", async (req, res) => {
     }
 });
 
+const nodemailer = require('nodemailer');
+require ('dotenv').confiig();
+
+const transporter = nodemailer.createTransport({
+    service: 'gimail',
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.USER,
+      pass: process.env.APP_PASS,
+    },
+  });
+
+  const mailOptions = {
+    from:{
+        name: 'Legends',
+        address: process.env.USER,
+    },
+    to: process.env.USER,
+    subject: "Verification",
+    text: "The email is verificated",    
+    html: "<b>The email is verificated</b>",
+  }
+
+  const sendMail = async(transporter, mailOptions) => {
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log("SAMO LEVSKI");
+    }catch(error){
+        console.log(error);
+    }
+  }
+
+  sendMail(transporter, mailOptions)
 
 
 module.exports = router;
