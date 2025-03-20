@@ -123,7 +123,7 @@ function ThemeChange() {
         </div>
   
         {/* Navigation Buttons */}
-        <div className="box-navbutt">
+        <div className="element_buttons">
           <button
             className={`navbutt ${slideIndex === 0 ? 'active' : ''}`}
             onClick={() => buttSlide(0)}
@@ -143,8 +143,8 @@ function ThemeChange() {
         </div>
   
         {/* Navigation Arrows */}
-        <button className="car_buttons" id="prev" onClick={() => nextSlide(-1)}>❮</button>
-        <button className="car_buttons" id="next" onClick={() => nextSlide(1)}>❯</button>
+        <button className="element_buttons" id="prev" onClick={() => nextSlide(-1)}>❮</button>
+        <button className="element_buttons" id="next" onClick={() => nextSlide(1)}>❯</button>
       </div>
     );
   }
@@ -166,6 +166,6 @@ createRoot(document.getElementById('carousel-box')).render(
     </StrictMode>
   )
 
-  
+
 
 
