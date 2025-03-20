@@ -1,60 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset='UTF-8'>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Video </title>
-
-    <style>
-        .container-video {
-            display: flex;
-            flex-direction: column;
-            max-width: 30%;
-            margin: 0 auto;
-            height: 10%;
-            width: 30%;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: rgb(189, 215, 241);
-        }
-
-        #video {
-            width: 100%;
-
-            margin-bottom: 20px;
-        }
-
-        .text-video {
-            font-size: 18px;
-            color: #333;
-            text-align: center;
-            
-        }
-    </style>
-
+    <title>Master Your Financial Future</title>
+    <link rel="stylesheet" href="../src/styles/video-page.css">
 </head>
 
 <body>
+
     <div class=" container-video">
         <div class="video">
             <video controls id="video">
                 <source src="../Preparation3/frontend/public/855388-uhd_3840_2160_25fps.mp4" type="video/mp4">
             </video>
-
         </div>
-
         <div class="text-video">
             This is the video text!
         </div>
-
-
-
     </div>
+
+
+    <section class="features">
+        <h2>Why Choose Us?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Calculate Your Finances</h3>
+                <p>Use our advanced tools to calculate your income, expenses, and savings effortlessly.</p>
+                <a href="../calculator.html" class="feature-button">Try Calculator</a>
+            </div>
+
+            <div class="feature-card">
+                <h3>Get Personalized Advice</h3>
+                <p>Receive expert financial advice tailored to your unique situation and goals.</p>
+                <a href="../portfolio.html" class="feature-button">Get Advice</a>
+            </div>
+
+
+            <div class="feature-card">
+                <h3>Plan Your Budget</h3>
+                <p>Create and manage a budget that works for you, with tips to optimize your spending.</p>
+                <a href="#budget-planning" class="feature-button">Start Planning</a>
+            </div>
+
+
+        </div>
+    </section>
+
+
 </body>
-
-
-
 
 </html>
