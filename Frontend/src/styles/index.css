@@ -10,6 +10,13 @@ body {
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
+    height: 100%;
+    width: max-content;
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
 #side-menu-button {
@@ -21,12 +28,13 @@ body {
 #side-menu {
     position: fixed;
     top: 0;
-    left: -250px; /* Hidden by default */
+    left: -258px; /* Hidden by default */
     width: 250px;
     height: 100%;
     color: white;
     transition: left 0.3s ease; /* Smooth sliding effect */
     z-index: 1000;
+    border-right: 8px solid black;
 }
 
 #side-menu.open {
@@ -95,22 +103,15 @@ body {
 
 header {
     position: fixed;
-    /* Фиксиране на хедъра в горната част */
     top: 0;
     left: 0;
     width: 100%;
-    /* Хедърът заема цялата ширина */
-    background-color: #333;
-    /* Тъмно сив фон */
-    color: white;
-    /* Бял текст */
     display: flex;
     align-items: center;
-    /* Центриране на елементите вертикално */
-    padding: 0.625rem 1.25rem;
-    /* 10px 20px / 16 = 0.625rem 1.25rem */
+    padding: 1rem 1.25rem;
     z-index: 1000;
-    /* Увеличаване на z-index за да е над други елементи */
+    height: 10%;
+    border-bottom: 7px solid black;
 }
 
 /* Лява част на хедъра: Лого и заглавие */
@@ -118,10 +119,14 @@ header {
     display: flex;
     align-items: center;
     flex: 1;
-    /* Заема оставащото пространство */
     flex-direction: row;
     justify-content: flex-start;
     gap: 2rem;
+    height: 100%;;
+}
+
+.logo{
+    height: 100%;;
 }
 
 /* Стилове за логото */
@@ -129,6 +134,8 @@ header {
     height: 2.5rem;
     /* 40px / 16 = 2.5rem */
     margin-right: 0.625rem;
+    height: 100%;
+    aspect-ratio: 580/321;
     /* 10px / 16 = 0.625rem */
 }
 
@@ -141,29 +148,59 @@ header {
 }
 
 .header-right {
-    margin-left: -0.3125rem;
-    /* 5px / 16 = 0.3125rem (намалено разстояние) */
     display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: center;
     align-items: center;
     flex: 1;
-    /* Заема оставащото пространство */
+    gap:5%;
+    margin-right: 5%
 }
 
 /* Стилове за бутоните в дясната част */
 .header-right .menu-item {
     margin-left: 0.3125rem;
-    /* 5px / 16 = 0.3125rem (намалено разстояние) */
     padding: 0.5rem 1rem;
-    /* 8px 16px / 16 = 0.5rem 1rem */
     font-size: 1rem;
-    /* 16px / 16 = 1rem */
     background-color: #555;
-    /* Сив фон за бутоните */
     color: white;
     border: none;
     border-radius: 0.3125rem;
-    /* 5px / 16 = 0.3125rem */
     cursor: pointer;
+}
+
+#rootmain{
+    height: 100%;
+    font-size: 200%;
+}
+
+#themebox{
+    height: 100%;
+}
+
+#login{
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+#signup{
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+#account{
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
 }
 
 /* Стилове за основното съдържание на страницата */
@@ -177,7 +214,7 @@ header {
 #carousel-box {
     width: 60%; /* Ограничете ширината на карусела */
     margin: 0 auto; /* Центрирайте карусела */
-    margin-top: 3%;
+    margin-top: 10%;
     position: relative; /* Уверете се, че позиционирането е правилно */
   }
   
@@ -290,8 +327,14 @@ header {
     border: none;
     padding: 10px 15px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 2rem;
     border-radius: 5px;
+    height: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
 
 
