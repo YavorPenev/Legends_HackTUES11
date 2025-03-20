@@ -19,20 +19,20 @@
             <div class="element" id="side-menu">
                 <button class="close-button" onclick="toggleMenu()">✖</button>
                 <div class="menu-content">
-                    <button class="menu-item" class="element_buttons"><a id="buttonlink">Loan Calculator</a></button>
-                    <button class="menu-item" class="element_buttons">About Us</button>
-                    <button class="menu-item" class="element_buttons">My Portfolio</button>
-                    <button class="menu-item" class="element_buttons">Contacts</button>
+                    <button class="menu-item element_buttons"><a id="buttonlink">Loan Calculator</a></button>
+                    <button class="menu-item element_buttons">About Us</button>
+                    <button class="menu-item element_buttons">My Portfolio</button>
+                    <button class="menu-item element_buttons">Contacts</button>
                 </div>
             </div>
 
             <script>
                 function toggleMenu() {
                     const menu = document.getElementById("side-menu");
-                    if (menu.elementList.contains("open")) {
-                        menu.elementList.remove("open"); // Hide the menu
+                    if (menu.classList.contains("open")) {
+                        menu.classList.remove("open"); // Hide the menu
                     } else {
-                        menu.elementList.add("open"); // Show the menu
+                        menu.classList.add("open"); // Show the menu
                     }
                 }
             </script>
