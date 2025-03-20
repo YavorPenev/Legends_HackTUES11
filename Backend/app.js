@@ -4,6 +4,7 @@ const mysql = require("mysql2");
 const bcrypt = require("bcrypt");
 const path = require("path");
 const { OpenAI } = require('openai');
+const nodemailer = require('nodemailer'); // Add this line
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 })
