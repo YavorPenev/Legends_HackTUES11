@@ -43,6 +43,16 @@ function ThemeChange() {
             sideMenu.classList.remove(...elementThemes);
             sideMenu.classList.add(elementThemes[index]);
         }
+
+        // Update #buttonlink text color
+        const buttonLink = document.getElementById("buttonlink");
+        if (buttonLink) {
+            if (index === 1) {
+                buttonLink.style.color = "black"; // White background
+            } else {
+                buttonLink.style.color = "white"; // Blue or purple background
+            }
+        }
     };
 
     useEffect(() => {
