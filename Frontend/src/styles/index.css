@@ -228,6 +228,40 @@ header {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+.box-navbutt {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 15px;
+    justify-content: center;
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.navbutt {
+    background-color: rgba(69, 69, 69, 0.321);
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.navbutt:hover {
+    background-color: rgba(69, 69, 69, 0.786);
+}
+
+.navbutt.active {
+    background-color: rgba(69, 69, 69, 0.786);
+}
+
+.navbutt.active {
+    background-color: rgba(69, 69, 69, 0.786);
+}
+
 
 
 
