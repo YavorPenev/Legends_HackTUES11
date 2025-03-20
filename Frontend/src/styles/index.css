@@ -243,6 +243,14 @@ header {
     z-index: 5;
 }
 
+#navbut {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 10px; /* Позиционирайте точките отдолу */
+    width: 100%;
+  }
+
 .navbutt {
     background-color: rgba(69, 69, 69, 0.321);
     border: none;
@@ -250,6 +258,7 @@ header {
     width: 20px;
     height: 20px;
     transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
 .navbutt:hover {

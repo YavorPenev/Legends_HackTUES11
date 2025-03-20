@@ -83,7 +83,7 @@ function ThemeChange() {
     }, []);
   
     return (
-      <div className="element-background" id="carousel">
+      <div className="element" id="carousel">
         {/* Slide 1 */}
         <div className={`slide ${slideIndex === 0 ? 'active' : 'inactive'}`}>
           <h2 className="carHeader">Slide 1</h2>
