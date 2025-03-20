@@ -1,5 +1,5 @@
 document.getElementById('login-btn').addEventListener('click', async () => {
-    const username = document.getElementById('username').value;
+    const username = document.getElementById('user_name').value;
     const password = document.getElementById('password').value;
 
     if (!username || !password) {

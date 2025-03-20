@@ -4,9 +4,10 @@ const mysql = require("mysql2");
 const bcrypt = require("bcrypt");
 const path = require("path");
 const axios = require("axios");
+const nodemailer = require("nodemailer");
 const { OpenAI } = require("openai");
 
-const ALPHA_VANTAGE_API_KEY = ALPHA_API_KEY;
+const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_API_KEY;
 const BASE_URL = "https://www.alphavantage.co/query";
 
 const openai = new OpenAI({
@@ -19,13 +20,22 @@ const router = express.Router();
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "efedrin12",
+    password: "#dn555555DN",
     database: "legendsdb"
 });
+
 
 db.connect((err) => {
     if (err) throw err;
     console.log("Connected to MySQL");
+});
+
+db.query("SELECT 1", (err, results) => {
+    if (err) {
+        console.error("Database connection failed:", err);
+    } else {
+        console.log("Database connection successful!");
+    }
 });
 
 // Serve Frontend Pages
@@ -46,25 +56,61 @@ router.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "Frontend", "public", "login.html"));
 });
 
-// Signup Route
-router.post("/signup", async (req, res) => {
-    const { username, password } = req.body;
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.APP_USER,
+        pass: process.env.APP_PASS,
+    },
+    tls: {
+        rejectUnauthorized: false, // Ignore self-signed certificate errors
+    }
+});
 
-    if (!username || !password) {
+router.post("/signup", async (req, res) => {
+    console.log("Received request body:", req.body); // Debugging log
+
+    const { username, password, email } = req.body;
+
+    if (!username || !password || !email) {
         return res.status(400).json({ error: "All fields are required." });
     }
 
+    console.log("Extracted Email:", email); // Debugging log to check if email is extracted
+
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-        
-        db.query(sql, [username, hashedPassword], (err, result) => {
+        const sql = "INSERT INTO users (user_name, password, email) VALUES (?, ?, ?)";
+
+        db.query(sql, [username, hashedPassword, email], async (err, result) => {
             if (err) {
+                if (err.code === 'ER_DUP_ENTRY') {
+                    return res.status(400).json({ error: "Username or email already exists." });
+                }
                 console.error("Database error:", err);
-                return res.status(400).json({ error: "Username already exists." });
+                return res.status(500).json({ error: "Database error occurred." });
             }
 
-            res.status(200).json({ message: "Signup successful!" });
+            console.log("User registered with email:", email); // Debugging log
+
+            // Email configuration
+            const mailOptions = {
+                from: `"Legends" <${process.env.APP_USER}>`,
+                to: email,
+                subject: "Verification",
+                text: "Your email has been verified.",
+                html: "<b>Your email has been verified.</b>",
+            };
+
+            try {
+                await transporter.sendMail(mailOptions);
+                console.log("✅ Verification email sent successfully to:", email);
+            } catch (error) {
+                console.error("❌ Error sending email:", error);
+                return res.status(500).json({ error: "Signup successful, but email could not be sent." });
+            }
+
+            res.status(200).json({ message: "Signup successful! Verification email sent." });
         });
     } catch (err) {
         console.error("Error during signup:", err);
@@ -72,7 +118,8 @@ router.post("/signup", async (req, res) => {
     }
 });
 
-// Login Route
+
+
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
 
@@ -198,41 +245,7 @@ router.post("/advice", async (req, res) => {
     }
 });
 
-const nodemailer = require('nodemailer');
-require ('dotenv').config();
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    auth: {
-      user: process.env.USER,
-      pass: process.env.APP_PASS,
-    },
-  });
-
-  const mailOptions = {
-    from:{
-        name: 'Legends',
-        address: "legendtues11@gmail.com",
-    },
-    to: process.env.USER,
-    subject: "Verification",
-    text: "The email is verificated",    
-    html: "<b>The email is verificated</b>",
-  }
-
-  const sendMail = async(transporter, mailOptions) => {
-    try {
-        await transporter.sendMail(mailOptions);
-        console.log("SAMO LEVSKI");
-    }catch(error){
-        console.log(error);
-    }
-  }
-
-  sendMail(transporter, mailOptions)
 
 
 module.exports = router;
