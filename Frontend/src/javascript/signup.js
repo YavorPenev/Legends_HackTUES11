@@ -21,7 +21,7 @@ document.getElementById('signup-btn').addEventListener('click', async () => {
 
         if (response.ok) {
             alert(result.message);
-            // Redirect to login page
+            window.location.href = '/'; 
         } else {
             alert(result.error);
         }

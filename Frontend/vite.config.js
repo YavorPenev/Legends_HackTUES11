@@ -4,8 +4,9 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        index: './index.html',
-        main: './calculator.html',
+        main: './index.html',
+        calculator: './calculator.html',
+        login: '../../public/login.html'
       }
     }
   }
