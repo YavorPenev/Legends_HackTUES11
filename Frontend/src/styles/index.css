@@ -367,6 +367,8 @@ header {
     padding: 3% 18% 10% 18%;
     /* Използвайте проценти за отстоянията */
     border-radius: 10px;
+    margin-left: -20%;
+    
 }
 
 .slide.active {
@@ -377,6 +379,21 @@ header {
 .slide.inactive {
     opacity: 0;
     transform: translateX(-100%);
+}
+
+#snimka{
+    width: 40%;
+    margin-top: 1.5%;
+}
+
+
+
+#text{
+    margin-top: 1.5%;
+    justify-content: start;
+    font-size: 15px;
+    margin-left: -12%;
+    width: 30%;
 }
 
 .infoContainer {
@@ -407,11 +424,11 @@ header {
 }
 
 #prev {
-    left: 5%;
+    left: 2%;
 }
 
 #next {
-    right: 5%;
+    right: 2%;
 }
 
 #prev:hover,
