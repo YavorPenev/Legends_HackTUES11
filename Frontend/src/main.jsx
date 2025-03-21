@@ -9,17 +9,17 @@ import Login from './login';
 import "./styles/index.css";
 import "./styles/themestyles.css";
 
-function toggleMenu() {
+function ToggleMenu() {
     const menu = document.getElementById("side-menu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
+    menu.style.display = menu.style.display === "flex" ? "none" : "flex";
 }
 
-function openPopup() {
+function OpenPopup() {
     const popup = document.getElementById("popup");
     popup.style.display = "block";
 }
 
-function closePopup() {
+function ClosePopup() {
     const popup = document.getElementById("popup");
     popup.style.display = "none";
 }
@@ -54,13 +54,13 @@ function Main() {
         <div>
             <header className="element">
                 <div className="header-left">
-                    <button id="menu-button" className="element_buttons" onClick={toggleMenu}>
+                    <button id="menu-button" className="element_buttons" onClick={ToggleMenu}>
                         ☰&nbsp;Menu
                     </button>
                     
 
                     <div className="element" id="side-menu">
-                        <button className="close-button" id="closebutton" onClick={toggleMenu}>
+                        <button className="close-button" id="closebutton" onClick={ToggleMenu}>
                             ✖
                         </button>
                         
@@ -81,7 +81,7 @@ function Main() {
                 </div>
 
                 <div className="header-right">
-                    <button className="element_buttons" id="contactsbuttons" onClick={openPopup}>
+                    <button className="element_buttons" id="contactsbuttons" onClick={OpenPopup}>
                         Contacts
                     </button>
                     <button type="button" className="element_buttons" id="login">Login</button>
@@ -89,7 +89,7 @@ function Main() {
 
                     <div className="popup-overlay" id="popup-overlay"></div>
                     <div className="popup" id="popup">
-                        <button onClick={closePopup}>✖</button>
+                        <button onClick={ClosePopup}>✖</button>
                         <h2>Contacts</h2>
                         <p>These are some contacts</p>
                     </div>

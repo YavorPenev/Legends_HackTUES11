@@ -178,12 +178,6 @@ header {
     cursor: pointer;
 }
 
-#rootmain {
-    height: 100%;
-    font-size: 200%;
-    aspect-ratio: 1/1;
-}
-
 #themebox {
     height: 100%;
     aspect-ratio: 1/1;
