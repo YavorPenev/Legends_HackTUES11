@@ -6,6 +6,8 @@ import Carousel from './parts/carousel';
 import ThemeChange from './parts/ThemeChange';
 import Calculator from './calculator';
 import Login from './login';
+import Signup from './signup';
+import Advice from './advice';
 import "./styles/index.css";
 import "./styles/themestyles.css";
 
@@ -247,6 +249,8 @@ function App() {
                 <Route path="/" element={<Main />} />
                 <Route path="/calculator" element={<Calculator />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/advice" element={<Advice />} />
             </Routes>
         </Router>
     );

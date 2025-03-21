@@ -54,7 +54,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "signup.html"));
+    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "index.html"));
 });
 
 
@@ -173,7 +173,7 @@ async function getInvestmentAdvice(userProfile) {
 
 // Frontend routes
 router.get("/advice", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "advice.html"));
+    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "index.html"));
 });
 
 router.post("/advice", async (req, res) => {
