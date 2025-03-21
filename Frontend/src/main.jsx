@@ -8,6 +8,11 @@ import Calculator from './calculator';
 import Login from './login';
 import Signup from './signup';
 import Advice from './advice';
+import Zakoni from './zakoni';
+import FAQ from './FAQ';
+import TOPCompanies from './TOP_companies';
+import Investments from './investments';
+import About from './about'; 
 import "./styles/index.css";
 import "./styles/themestyles.css";
 
@@ -52,7 +57,7 @@ function ExtraElementBridge() {
 }
 
 function Main() {
-    const [isMenuVisible, setIsMenuVisible] = useState(false); // State to track menu visibility
+    const [isMenuVisible, setIsMenuVisible] = useState(false); 
 
     const toggleMenu = () => {
         setIsMenuVisible((prev) => !prev);
@@ -74,7 +79,7 @@ function Main() {
 
                         <div className="menu-content">
                             <NavLink className="menu-item element_buttons" to="/calculator">Go to Calculator</NavLink>
-                            <button className="menu-item element_buttons">About Us</button>
+                            <NavLink className="menu-item element_buttons" to="/about">About Us</NavLink> {/* Add About Us link */}
                             <button className="menu-item element_buttons">My Portfolio</button>
                             <button className="menu-item element_buttons">Contacts</button>
                         </div>
@@ -251,6 +256,11 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/advice" element={<Advice />} />
+                <Route path="/zakoni" element={<Zakoni />} />
+                <Route path="/faq" element={<FAQ />} />
+                <Route path="/top-companies" element={<TOPCompanies />} />
+                <Route path="/investments" element={<Investments />} />
+                <Route path="/about" element={<About />} /> 
             </Routes>
         </Router>
     );
