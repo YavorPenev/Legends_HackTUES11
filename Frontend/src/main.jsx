@@ -241,7 +241,11 @@ function App() {
             <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path="/calculator" element={<Calculator />} />
+                <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/advice" element={<Advice />} />
+                <Route path="/investments" element={<Investments />} />
+
             </Routes>
         </Router>
     );
