@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router";
+import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router";
 import Carousel from './parts/carousel';
 import ThemeChange from './parts/ThemeChange';
 import Calculator from './calculator';
@@ -50,30 +50,35 @@ function ExtraElementBridge() {
 }
 
 function Main() {
+    const [isMenuVisible, setIsMenuVisible] = useState(false); // State to track menu visibility
+
+    const toggleMenu = () => {
+        setIsMenuVisible((prev) => !prev);
+    };
+
     return (
         <div>
             <header className="element">
                 <div className="header-left">
-                    <button id="menu-button" className="element_buttons" onClick={ToggleMenu}>
+                    <button id="menu-button" className="element_buttons" onClick={toggleMenu}>
                         ☰&nbsp;Menu
                     </button>
-                    
 
-                    <div className="element" id="side-menu">
-                        <button className="close-button" id="closebutton" onClick={ToggleMenu}>
+                    {/* Use React state to control the visibility of the side menu */}
+                    <div className={`element ${isMenuVisible ? "open" : ""}`} id="side-menu">
+                        <button className="close-button" id="closebutton" onClick={toggleMenu}>
                             ✖
                         </button>
-                        
+
                         <div className="menu-content">
-                            <button className="menu-item element_buttons">
-                                <a href="/calcPage" id="buttonlink">Loan Calculator</a>
-                            </button>
+                            <NavLink className="menu-item element_buttons" to="/calculator">Go to Calculator</NavLink>
                             <button className="menu-item element_buttons">About Us</button>
                             <button className="menu-item element_buttons">My Portfolio</button>
                             <button className="menu-item element_buttons">Contacts</button>
                         </div>
                     </div>
-                    <ThemeChange/>
+
+                    <ThemeChange />
 
                     <div className="logo">
                         <img alt="Logo" src="logo.png" />
@@ -100,11 +105,11 @@ function Main() {
                 </div>
             </header>
 
-            <a className="element_buttons" id="aibutton">AI</a>            
+            <a className="element_buttons" id="aibutton">AI</a>
 
             <div id="carousel-flex">
-                
-                <div className="element" id="carousel-box"><Carousel/></div>
+
+                <div className="element" id="carousel-box"><Carousel /></div>
                 <p id="promotext">At SmartFinance, we believe that financial education is the key to a secure and successful future. Our
                     platform is designed to simplify complex financial concepts, empowering you with the knowledge to make
                     informed decisions about saving, investing, budgeting, and more.
@@ -116,7 +121,7 @@ function Main() {
             </div>
 
 
-            
+
 
             <div id="container" className="element">
                 <div className="cont">
@@ -224,9 +229,9 @@ function Main() {
                         <p><strong>Email:</strong> yavorpen@gmail.com</p>
                     </div>
                 </div>
-                <h3 style={{ textAlign: "center" }}>
+                <h3 style={{ textAlign: 'center' }}>
                     Copyright © 2025, All Rights Reserved | Designed By{" "}
-                    <a style={{ color: "rgb(207, 207, 207)" }} href="aboutus.html">
+                    <a style={{ color: 'rgb(207, 207, 207)' }} href="aboutus.html">
                         Legends Team
                     </a>
                 </h3>
@@ -241,11 +246,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path="/calculator" element={<Calculator />} />
-                <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/advice" element={<Advice />} />
-                <Route path="/investments" element={<Investments />} />
-
             </Routes>
         </Router>
     );

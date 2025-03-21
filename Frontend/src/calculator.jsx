@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router";
 import "./styles/calculator.css";
+import ThemeChange from "./parts/ThemeChange";
+import { useEffect } from 'react';
 
 function Util() {
   useEffect(() => {
-      const button = document.getElementById('themebutton');
-      if (button) {
-          button.className = 'main_buttons';
-      }
+    const button = document.getElementById('themebutton');
+    if (button) {
+      button.className = 'main_buttons';
+    }
   }, []);
 
   return null;
@@ -39,6 +41,7 @@ function CalcPage() {
   return (
     <div>
       <div id="wholepage">
+        <ThemeChange/>
         <h1 className="element" id="pagename">
           Advanced Loan Calculator
         </h1>
@@ -126,9 +129,9 @@ function CalcPage() {
             </p>
           </div>
         </div>
-        <h3 style="text-align: center;">
+        <h3 style={{ textAlign: 'center' }}>
           Copyright © 2025, All Rights Reserved | Designed By{" "}
-          <a style={{ color: "rgb(207, 207, 207)" }} href="aboutus.html">
+          <a style={{ color: 'rgb(207, 207, 207)' }} href="aboutus.html">
             Legends Team
           </a>
         </h3>
@@ -138,13 +141,7 @@ function CalcPage() {
 }
 
 function Calculator() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/calculator" element={<CalcPage />} />
-      </Routes>
-    </Router>
-  );
+  return <CalcPage />;
 }
 
 export default Calculator;

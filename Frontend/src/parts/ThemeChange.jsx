@@ -73,7 +73,7 @@ function ThemeChange() {
     return (
         <div id="themebox">
             <button className="element_buttons" id="themebutton" onClick={CycleTheme}>
-                <FontAwesomeIcon icon={faCircleHalfStroke} />
+                <FontAwesomeIcon icon={faCircleHalfStroke}/>
             </button>
         </div>
     );
