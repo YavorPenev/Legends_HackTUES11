@@ -245,8 +245,8 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<Main />} />
-                <Route path="/calculator" element={<Calculator />} />
-                <Route path="/login" element={<Login />} />
+             
+
             </Routes>
         </Router>
     );
