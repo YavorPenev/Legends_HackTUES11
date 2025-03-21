@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import React, { useState, useEffect } from 'react';
-import ThemeChange from './ThemeChange';
+import ThemeChange from './parts/ThemeChange';
 import '../styles/themestyles.css';
 
 function Carousel() {
