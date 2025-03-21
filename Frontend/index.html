@@ -41,15 +41,20 @@
             <div id="rootmain"></div>
 
             <div class="logo">
-                <img alt="Logo">
+                <img alt="Logo" src="logo.png">
             </div>
         </div>
 
         <!-- Дясна част: Бутони -->
         <div class="header-right">
+            <button class="element_buttons" id="contactsbuttons" onclick="openPopup()">Contacts</button>
+            <button type="button" class="element_buttons" id="login">Login</button>
+            <button type="button" class="element_buttons" id="signup">Signup</button>
+
+
 
             <!-- Основен бутон за отваряне на изскачащия прозорец -->
-            <button class="element_buttons" id="contactsbuttons" onclick="openPopup()">Contacts</button>
+
 
             <!-- Изскачащ прозорец -->
             <div class="popup-overlay" id="popup-overlay"></div>
@@ -70,39 +75,22 @@
                     document.getElementById('popup-overlay').style.display = 'none';
                 }
 
-                function updateAccountLogo() {
-                    const accountButton = document.getElementById('account'); // Get the button by ID
-                    const accountLogo = document.getElementById('accountlogo'); // Get the logo image by ID
-
-                    if (accountButton.classList.contains('whiteButton')) {
-                        accountLogo.src = "proficonblack.png"; // Set black icon
-                    } else if (accountButton.classList.contains('blueButton') || accountButton.classList.contains('purpleButton')) {
-                        accountLogo.src = "proficonwhite.png"; // Set white icon
-                    } else {
-                        accountLogo.src = "proficon.png";
-                    }
-                }
-
-                // Call the function initially to set the correct logo
-                updateAccountLogo();
-
-                // Add a MutationObserver to watch for class changes on the button
-                const accountButton = document.getElementById('account');
-                const observer = new MutationObserver(updateAccountLogo);
-
-                observer.observe(accountButton, { attributes: true, attributeFilter: ['class'] });
             </script>
 
-            <button type="button" class="element_buttons" id="login">Login</button>
-            <button type="button" class="element_buttons" id="signup">Signup</button>
-            <button type="button" class="element_buttons" id="account"><img id="accountlogo"
-                    src="public/proficon.png"></button>
+            <div id="rightheader">
+
+            </div>
+
         </div>
     </header>
 
     <div id="root"></div>
 
     <div class="element" id="carousel-box"></div>
+
+    <button href="http://localhost:8000/advice">Advice</button>
+
+    
 
     <footer>
         <div class="footer-container">
