@@ -41,7 +41,7 @@ db.query("SELECT 1", (err, results) => {
 
 // Serve Frontend Pages
 router.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "index.html"), (err) => {
+    res.sendFile(path.join(__dirname, "..", "Frontend", "index.html"), (err) => {
         if (err) {
             console.error("Error loading index.html:", err);
             res.status(500).json({ error: "Internal Server Error: Unable to load index.html" });
@@ -99,8 +99,8 @@ router.post("/signup", async (req, res) => {
                 from: `"Legends" <${process.env.APP_USER}>`,
                 to: email,
                 subject: "Verification",
-                text: "Your email has been verified.",
-                html: "<b>Your email has been verified.</b>",
+                text: `Your email has been verified. Visit our homepage: http://localhost:8000`,
+                html: `<b>Your email has been verified.</b><br><a href="http://localhost:8000">Visit our homepage</a>`,
             };
 
             try {
@@ -227,7 +227,7 @@ async function getInvestmentAdvice(userProfile) {
 
 // Frontend routes
 router.get("/advice", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "advice.html"));
+    res.sendFile(path.join(__dirname, "..", "Frontend", "src", "advice.html"));
 });
 
 router.post("/advice", async (req, res) => {
@@ -245,8 +245,5 @@ router.post("/advice", async (req, res) => {
         res.status(500).json({ error: "Internal server error." });
     }
 });
-
-
-
 
 module.exports = router;
