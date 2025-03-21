@@ -51,10 +51,7 @@
             <button type="button" class="element_buttons" id="login">Login</button>
             <button type="button" class="element_buttons" id="signup">Signup</button>
 
-
-
             <!-- Основен бутон за отваряне на изскачащия прозорец -->
-
 
             <!-- Изскачащ прозорец -->
             <div class="popup-overlay" id="popup-overlay"></div>
@@ -74,21 +71,44 @@
                     document.getElementById('popup').style.display = 'none';
                     document.getElementById('popup-overlay').style.display = 'none';
                 }
-
             </script>
 
-            <div id="rightheader">
-
-            </div>
+            <button id="profilebutton" class="element_buttons"><img id="profilepic" src="proficon.png"/></button>
 
         </div>
     </header>
 
-    <div id="root"></div>
+    <a class="element_buttons" id="aibutton">AI</a>
 
     <div class="element" id="carousel-box"></div>
 
     <button href="http://localhost:8000/advice">Advice</button>
+
+    <section class="features">
+        <h2>Why Choose Us?</h2>
+        <div id="feature-grid">
+            <div class="element" id="feature-card">
+                <h3>Calculate Your Finances</h3>
+                <p>Use our advanced tools to calculate your income, expenses, and savings effortlessly.</p>
+                <a href="../calculator.html" class="element_buttons" id="feature-button">Try Calculator</a>
+            </div>
+
+            <div class="element" id="feature-card">
+                <h3>Get Personalized Advice</h3>
+                <p>Receive expert financial advice tailored to your unique situation and goals.</p>
+                <a href="../portfolio.html" class="element_buttons" id="feature-button">Get Advice</a>
+            </div>
+
+
+            <div class="element" id="feature-card">
+                <h3>Plan Your Budget</h3>
+                <p>Create and manage a budget that works for you, with tips to optimize your spending.</p>
+                <a href="#budget-planning" class="element_buttons" id="feature-button">Start Planning</a>
+            </div>
+
+
+        </div>
+    </section>
 
     
 

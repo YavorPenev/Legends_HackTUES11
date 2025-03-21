@@ -3,8 +3,6 @@ import { createRoot } from 'react-dom/client'
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
-import proficonblack from "../../public/proficonblack.png";
-import proficonwhite from "../../public/proficonwhite.png";
 
 function ThemeChange() {
     const [indexElement, changeElement] = useState(0);
@@ -182,32 +180,6 @@ function Carousel() {
         </div>
     );
 }
-
-function AccountButton({themeClass}) {
-    const [iconSrc, setIconSrc] = useState(proficonwhite);
-
-    useEffect(() => {
-        // Update icon based on the theme class
-        if (themeClass == "element_buttons whiteButton") {
-            setIconSrc("proficonblack.png");
-        }
-        if(themeClass == "element_buttons blueButton") {
-            setIconSrc("proficonwhite.png");
-        }
-    }, [themeClass]); // Runs when `themeClass` changes
-
-    return (
-        <button type="button" className={`element_buttons ${themeClass}`} id="account">
-            <img id="accountlogo" src={iconSrc} alt="Profile Icon" />
-        </button>
-    );
-}
-
-createRoot(document.getElementById('rightheader')).render(
-    <StrictMode>
-        <AccountButton/>
-    </StrictMode>
-)
 
 createRoot(document.getElementById('rootmain')).render(
     <StrictMode>
