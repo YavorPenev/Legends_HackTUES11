@@ -24,36 +24,39 @@ function CalcPage() {
 
     return (
         <div id="wholepage">
-            <h1 className="pagename">Advanced Loan Calculator</h1>
+            <h1 className="element" id="pagename">Advanced Loan Calculator</h1>
             <div id="calculatorbox">
                 <div id="leftbox" className="element">
                     <h2>Enter your loan details:</h2>
                     <input id="loaninput"
+                        className="element_buttons"
                         type="number"
                         value={loan}
                         onChange={(e) => setLoan(Number(e.target.value))}
                         placeholder="Loan Amount..."
                     />
                     <input id="interestinput"
+                    className="element_buttons"
                         type="number"
                         value={interest}
                         onChange={(e) => setInterest(Number(e.target.value))}
                         placeholder="Yearly Interest Rate ..."
                     />
                     <input id="monthsinput"
+                    className="element_buttons"
                         type="number"
                         value={months}
                         onChange={(e) => setMonths(Number(e.target.value))}
                         placeholder="Months of Payment..."
                     />
+                    <button className="element_buttons" id="calculatebutton" onClick={handleCalculate}>Calculate</button>
                 </div>
                 <div id="rightbox">
                     <div id="paymentbox" className="element">
                         <h3>Your monthly payment:</h3>
-                        <button onClick={handleCalculate}>Calculate</button>
                         <h4 id="paymentfield">{payment}</h4>
                     </div>
-                    <div id="interestbox" className="elements">
+                    <div id="interestbox" className="element">
                         <h3>Total interest paid:</h3>
                         <h4 id="interestpaidfield">{interestPaid}</h4>
                     </div>
