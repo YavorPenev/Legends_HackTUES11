@@ -2,6 +2,17 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router";
 import "./styles/calculator.css";
 
+function Util() {
+  useEffect(() => {
+      const button = document.getElementById('themebutton');
+      if (button) {
+          button.className = 'main_buttons';
+      }
+  }, []);
+
+  return null;
+}
+
 function Calc(loan, interest, months) {
   const minterest = interest / 100 / 12;
   const payment =

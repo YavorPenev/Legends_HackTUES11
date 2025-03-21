@@ -2,9 +2,11 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router";
+import Carousel from './parts/carousel';
 import ThemeChange from './parts/ThemeChange';
 import Calculator from './calculator';
 import Login from './login';
+import "./styles/index.css";
 import "./styles/themestyles.css";
 
 function toggleMenu() {
@@ -55,11 +57,13 @@ function Main() {
                     <button id="menu-button" className="element_buttons" onClick={toggleMenu}>
                         ☰&nbsp;Menu
                     </button>
+                    
 
                     <div className="element" id="side-menu">
                         <button className="close-button" id="closebutton" onClick={toggleMenu}>
                             ✖
                         </button>
+                        
                         <div className="menu-content">
                             <button className="menu-item element_buttons">
                                 <a href="/calcPage" id="buttonlink">Loan Calculator</a>
@@ -69,6 +73,7 @@ function Main() {
                             <button className="menu-item element_buttons">Contacts</button>
                         </div>
                     </div>
+                    <ThemeChange/>
 
                     <div className="logo">
                         <img alt="Logo" src="logo.png" />
@@ -96,6 +101,8 @@ function Main() {
             </header>
 
             <a className="element_buttons" id="aibutton">AI</a>
+
+            <Carousel/>
 
             <div id="carousel-flex">
                 <div className="element" id="carousel-box"></div>
@@ -232,7 +239,7 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<Main />} />
-                <Route path="/calcPage" element={<Calculator />} />
+                <Route path="/calculator" element={<Calculator />} />
                 <Route path="/login" element={<Login />} />
             </Routes>
         </Router>

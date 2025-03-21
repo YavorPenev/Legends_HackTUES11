@@ -1,3 +1,9 @@
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router";
+import "../styles/index.css";
+
 function Carousel() {
     const [slideIndex, setSlideIndex] = useState(0);
 
