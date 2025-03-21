@@ -18,21 +18,12 @@ const router = express.Router();
 
 // MySQL Database Connection
 const db = mysql.createConnection({
-<<<<<<< HEAD:Backend/apps.js
-    host: "localhost",
-    user: "root",
-    password: "#dn555555DN",
-    database: "legendsdb"
-});
-=======
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     port: process.env.DB_PORT
   });
-
->>>>>>> 22501568f5b5e08c22c619807363b917eaef5f71:Backend/app.js
 
 
 db.connect((err) => {
