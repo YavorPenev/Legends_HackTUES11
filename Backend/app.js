@@ -129,7 +129,7 @@ router.post("/login", async (req, res) => {
     }
 
     try {
-        const sql = "SELECT * FROM users WHERE username = ?";
+        const sql = "SELECT * FROM users WHERE user_name = ?";
         db.query(sql, [username], async (err, results) => {
             if (err || results.length === 0) {
                 return res.status(400).json({ error: "Invalid credentials." });
