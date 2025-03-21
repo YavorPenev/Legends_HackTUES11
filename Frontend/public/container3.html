@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Container Example</title>
+    <script src="https://kit.fontawesome.com/eb00f32ec1.js" crossorigin="anonymous"></script>
+    <link href="../src/styles/containers.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="cont1">
+            <div class="container2">
+                <div class="image">
+                    <a href="https://bg.wikipedia.org/wiki/%D0%AE%D1%82%D1%8E%D0%B1">
+                        <img src="../Preparation3/frontend/public/sn3.jfif" alt="1">
+                    </a>
+                </div>
+
+                <div class="main-text" id="main-text">
+                    YouTube is the largest video-sharing platform in the world, with billions of users watching content
+                    daily. Launched in 2005, it has transformed the way people consume media, offering a space for
+                    entertainment, education, and creativity. From music videos and vlogs to tutorials and live streams,
+                    YouTube has something for everyone. Creators can upload content, build communities, and even earn
+                    revenue through ads, memberships, and sponsorships. With powerful algorithms, YouTube recommends
+                    personalized content, making it easy to discover new videos. As a platform, YouTube is constantly
+                    evolving, introducing features like YouTube Shorts (for quick, engaging videos), YouTube Premium
+                    (ad-free experience), and YouTube Live (for real-time streaming). The platform has also faced
+                    criticism for its handling of copyright issues, misinformation, and inappropriate content. Despite
+                    these challenges, YouTube remains a dominant force in the digital landscape, shaping trends,
+                    influencing culture, and connecting people around the globe. shaping trends, influencing culture, and
+                    connecting people around the globe.
+                </div>
+            </div>
+
+            <div class="remaining-text" id="remaining-text"></div>
+
+            
+
+        </div>
+
+        <div class="icons">
+            <span class="rating-number" id="rating-number">0.0</span>
+            <span class="i" data-value="1.0"><i class="fas fa-star"></i></span>
+            <span class="i" data-value="2.0"><i class="fas fa-star"></i></span>
+            <span class="i" data-value="3.0"><i class="fas fa-star"></i></span>
+            <span class="i" data-value="4.0"><i class="fas fa-star"></i></span>
+            <span class="i" data-value="5.0"><i class="fas fa-star"></i></span>
+        </div>
+    </div>
+
+    <script>
+        const stars = document.querySelectorAll('.i');
+        const ratingNumber = document.getElementById('rating-number');
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = star.getAttribute('data-value');
+                ratingNumber.textContent = value;
+                stars.forEach(s => {
+                    if (s.getAttribute('data-value') <= value) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        const mainText = document.getElementById('main-text');
+        const remainingText = document.getElementById('remaining-text');
+
+        if (mainText.clientHeight > 100) {
+            remainingText.innerHTML = mainText.innerHTML.substring(988);
+            mainText.innerHTML = mainText.innerHTML.substring(0, 988);
+            remainingText.style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

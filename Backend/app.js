@@ -227,7 +227,7 @@ async function getInvestmentAdvice(userProfile) {
 
 // Frontend routes
 router.get("/advice", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "Frontend", "src", "advice.html"));
+    res.sendFile(path.join(__dirname, "..", "Frontend","Public", "advice.html"));
 });
 
 router.post("/advice", async (req, res) => {
