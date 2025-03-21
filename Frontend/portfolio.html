@@ -1,40 +1,54 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio</title>
-    <script type="module" src="src/network/Portfolio.jsx"></script>
-  </head>
-  <body>
-    <div class = "form" id = "finance-form">
-      <input type="text" id="goals" placeholder="Enter your goals", required>
-      <input type="number" id="income" placeholder="Enter your monthly income", required>
-      <input type="number" id="expenses" placeholder="Enter your monthly expenses", required>
-      <div id="root"></div>
-      <button type = "button">Get an answer</button>
-    </div>  
-    
-    <script>
-      document.getElementById('finance-form').addEventListener('submit', async function(e) {
-          e.preventDefault();
-          const income = document.getElementById('income').value;
-          const expenses = document.getElementById('expenses').value;
-          const goals = document.getElementById('goals').value;
-          const response = await fetch('/api/financial-advice', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                  income: income,
-                  expenses: expenses,
-                  goals: goals
-              })
-          });
-          const data = await response.json();
-          document.getElementById('result').innerHTML = `<h2>Recommended Strategy</h2><p>${data.advice}</p>`;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+  <script type="module" src="src/network/Portfolio.jsx"></script>
+  <link href="../Frontend/src/styles/portfolio.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <header class="header">
+    <h1>My portfolio</h1>
+  </header>
+
+  <div class="form" id="finance-form">
+    <input type="text" id="goals" placeholder="Enter your goals" , required>
+    <input type="number" id="income" placeholder="Enter your monthly income" , required>
+    <input type="number" id="expenses" placeholder="Enter your monthly expenses" , required>
+    <div id="root"></div>
+    <button type="button">Get an answer</button>
+  </div>
+
+  <div class="description">
+    <p>Our investment advice service helps you make informed decisions about your finances. Enter your income, expenses, and goals to receive personalized recommendations.</p>
+  </div>
+
+  <script>
+    document.getElementById('finance-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const income = document.getElementById('income').value;
+      const expenses = document.getElementById('expenses').value;
+      const goals = document.getElementById('goals').value;
+      const response = await fetch('/api/financial-advice', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          income: income,
+          expenses: expenses,
+          goals: goals
+        })
       });
+      const data = await response.json();
+      document.getElementById('result').innerHTML = `<h2>Recommended Strategy</h2><p>${data.advice}</p>`;
+    });
   </script>
-  </body>
+
+</body>
+
 </html>
