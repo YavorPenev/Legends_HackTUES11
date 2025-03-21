@@ -23,38 +23,40 @@ function CalcPage() {
     };
 
     return (
-        <div>
+        <div id="wholepage">
             <h1 className="pagename">Advanced Loan Calculator</h1>
-            <div className="element">
-                <h2>Enter your loan details:</h2>
-                <div>
-                    <input
+            <div id="calculatorbox">
+                <div id="leftbox" className="element">
+                    <h2>Enter your loan details:</h2>
+                    <input id="loaninput"
                         type="number"
                         value={loan}
                         onChange={(e) => setLoan(Number(e.target.value))}
                         placeholder="Loan Amount..."
                     />
-                    <input
+                    <input id="interestinput"
                         type="number"
                         value={interest}
                         onChange={(e) => setInterest(Number(e.target.value))}
                         placeholder="Yearly Interest Rate ..."
                     />
-                    <input
+                    <input id="monthsinput"
                         type="number"
                         value={months}
                         onChange={(e) => setMonths(Number(e.target.value))}
                         placeholder="Months of Payment..."
                     />
                 </div>
-                <div>
-                    <h3>Your monthly payment:</h3>
-                    <button onClick={handleCalculate}>Calculate</button>
-                    <h4 id="paymentfield">{payment}</h4>
-                </div>
-                <div>
-                    <h3>Total interest paid:</h3>
-                    <h4 id="interestpaidfield">{interestPaid}</h4>
+                <div id="rightbox">
+                    <div id="paymentbox" className="element">
+                        <h3>Your monthly payment:</h3>
+                        <button onClick={handleCalculate}>Calculate</button>
+                        <h4 id="paymentfield">{payment}</h4>
+                    </div>
+                    <div id="interestbox" className="elements">
+                        <h3>Total interest paid:</h3>
+                        <h4 id="interestpaidfield">{interestPaid}</h4>
+                    </div>
                 </div>
             </div>
         </div>

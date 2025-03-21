@@ -1,0 +1,96 @@
+body
+{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+#wholepage
+{
+    margin: 0px 0px 0px 0px;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 5%;
+}
+
+.pagename{
+    text-align: center;
+}
+
+#root2
+{
+    position: absolute;
+    left: 3%;
+    top: 2%;
+}
+
+#calculatorbox
+{
+    margin-top: 15%;
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    width: 70%;
+    top: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 8%;
+    height: 40%;
+    padding-bottom: 5%;
+    padding-top: 5%;
+    margin-bottom: 15%;
+    border-radius: 15px;
+}
+
+#leftbox
+{
+    display: flex;
+    flex-direction: column;
+    gap: 20%;
+    align-items: center;
+    padding: 3%;
+}
+
+#rightbox
+{
+    display: flex;
+    flex-direction: column;
+    gap: 15%;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+}
+
+#interestbox
+{
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+}
+
+#interestpaidfield{
+    margin-top: 10%;
+}
+
+#root2
+{
+    position: absolute;
+    left: 3%;
+    top: 2%;
+}
+
+#themebox{
+    position: absolute;
+    right: 2%;
+    top: 2%;
+}
+
+#themebutton{
+    
+    margin-left: 100%;
+    top: 2%;
+    width: fit-content;
+    aspect-ratio: 1/1;
+    font-size: 250%;
+}
+
