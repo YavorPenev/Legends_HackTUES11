@@ -1,7 +1,6 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router";
+import React, { useState, useEffect, StrictMode } from 'react';
+import { BrowserRouter as Router, Routes, Route, NavLink, Link } from "react-router";
 import Carousel from './parts/carousel';
 import ThemeChange from './parts/ThemeChange';
 import Calculator from './calculator';
@@ -33,23 +32,33 @@ function ClosePopup() {
 
 function ExtraElementBridge() {
     useEffect(() => {
+        // Function to update text color based on the theme
         const updateTextColor = () => {
             const infofields = document.getElementsByClassName('element');
 
             Array.from(infofields).forEach((infofield) => {
                 const isBlueOrPurple = infofield.classList.contains('blueElement') || infofield.classList.contains('purpleElement');
-
                 const textfield = infofield.querySelector('.main-text');
+
                 if (textfield) {
+                    // Set text color based on theme class presence
                     textfield.style.color = isBlueOrPurple ? 'white' : 'black';
                 }
             });
         };
+
+        // Initial check to update text color based on existing theme
         updateTextColor();
 
+        // Listen for changes in the DOM (theme changes)
         const observer = new MutationObserver(updateTextColor);
-        observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['className'] });
+        observer.observe(document.body, {
+            attributes: true,
+            subtree: true,
+            attributeFilter: ['class'] // Monitor class changes
+        });
 
+        // Clean up observer when the component is unmounted
         return () => observer.disconnect();
     }, []);
 
@@ -65,6 +74,7 @@ function Main() {
 
     return (
         <div>
+            <ExtraElementBridge />
             <header className="element">
                 <div className="header-left">
                     <button id="menu-button" className="element_buttons" onClick={toggleMenu}>
@@ -112,34 +122,33 @@ function Main() {
                 </div>
             </header>
 
-            <a className="element_buttons" id="aibutton">AI</a>
+            <Link className="element_buttons" id="aibutton">AI</Link>
 
             <div id="carousel-flex">
 
                 <div className="element" id="carousel-box"><Carousel /></div>
-                <p id="promotext">At SmartFinance, we believe that financial education is the key to a secure and successful future. Our
+                <p id="promotext">At SmartFinance, we believe that financial education is the key to Link secure and successful future. Our
                     platform is designed to simplify complex financial concepts, empowering you with the knowledge to make
                     informed decisions about saving, investing, budgeting, and more.
-                    Whether you're a beginner looking to build a strong financial foundation or an expert aiming to refine your
+                    Whether you're Link beginner looking to build Link strong financial foundation or an expert aiming to refine your
                     strategies, SmartFinance offers expert insights, easy-to-follow guides, and practical tools to help you on
                     your journey.
                 </p>
 
             </div>
 
-
-
-
             <div id="container" className="element">
                 <div className="cont">
                     <div className="content">
-                        <a className="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
+
+                        <Link className="image-box" to="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
                             <img className="image" src="/images.jfif" alt="1" />
-                        </a>
+                        </Link>
+
                         <div className="main-text" id="main-text">
                             <h1>Budgeting: The Path to Smarter Financial Decisions</h1>
-                            <p>Budgeting is not just a tool for managing finances – it is a way of life that helps you achieve
-                                financial stability and make more informed decisions. In a world of rapid changes and
+                            <p>Budgeting is not just Link tool for managing finances – it is Link way of life that helps you achieve
+                                financial stability and make more informed decisions. In Link world of rapid changes and
                                 unpredictable economic conditions, budgeting is your best ally for gaining control over your
                                 money and achieving long-term goals. Here’s how you can use budgeting to make smarter financial
                                 choices and improve your quality of life.</p>
@@ -151,13 +160,13 @@ function Main() {
             <div id="container" className="element">
                 <div className="cont">
                     <div className="content">
-                        <a className="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
+                        <Link className="image-box" to="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
                             <img className="image" src="/images3.webp" alt="1" />
-                        </a>
+                        </Link>
                         <div className="main-text" id="main-text">
                             <h1>Debt Management</h1>
-                            <p>Debt is a common part of modern life, but if not managed properly, it can lead to serious
-                                financial problems. Whether it’s credit cards, loans, or mortgages, having a clear strategy
+                            <p>Debt is Link common part of modern life, but if not managed properly, it can lead to serious
+                                financial problems. Whether it’s credit cards, loans, or mortgages, having Link clear strategy
                                 for
                                 managing debt is crucial. Here’s how you can take control of your finances and work towards
                                 becoming debt-free.
@@ -170,14 +179,14 @@ function Main() {
             <div id="container" className="element">
                 <div className="cont">
                     <div className="content">
-                        <a className="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
+                        <Link className="image-box" to="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
                             <img className="image" src="/images2.jfif" alt="1" />
-                        </a>
+                        </Link>
                         <div className="main-text" id="main-text">
-                            <h1>How to Build a Savings Strategy</h1>
+                            <h1>How to Build Link Savings Strategy</h1>
                             <p>A savings strategy is one of the most important elements of personal financial planning. It not
                                 only helps you handle unexpected expenses but also enables you to achieve long-term financial
-                                goals, such as buying a home, retiring comfortably, or realizing your dreams. Here’s how you can
+                                goals, such as buying Link home, retiring comfortably, or realizing your dreams. Here’s how you can
                                 build an effective savings strategy that will help you live with greater confidence and peace of
                                 mind.</p>
                         </div>
@@ -191,20 +200,20 @@ function Main() {
                     <div className="element" id="feature-card">
                         <h3>Calculate Your Finances</h3>
                         <p>Use our advanced tools to calculate your income, expenses, and savings effortlessly.</p>
-                        <a href="../calculator.html" className="element_buttons" id="feature-button">Try Calculator</a>
+                        <Link to="/calculator" className="element_buttons" id="feature-button">Try Calculator</Link>
                     </div>
 
                     <div className="element" id="feature-card">
                         <h3>Get Personalized Advice</h3>
                         <p>Receive expert financial advice tailored to your unique situation and goals.</p>
-                        <a href="../portfolio.html" className="element_buttons" id="feature-button">Get Advice</a>
+                        <Link to="/portfolio" className="element_buttons" id="feature-button">Get Advice</Link>
                     </div>
 
 
                     <div className="element" id="feature-card">
                         <h3>Plan Your Budget</h3>
-                        <p>Create and manage a budget that works for you, with tips to optimize your spending.</p>
-                        <a href="#budget-planning" className="element_buttons" id="feature-button">Start Planning</a>
+                        <p>Create and manage Link budget that works for you, with tips to optimize your spending.</p>
+                        <Link to="#budget-planning" className="element_buttons" id="feature-button">Start Planning</Link>
                     </div>
 
 
@@ -220,14 +229,14 @@ function Main() {
                     </div>
                     <div className="footer-column">
                         <h3>Navigation</h3>
-                        <a href="#">Home</a>
-                        <a href="#">Contacts</a>
+                        <Link to="#">Home</Link>
+                        <Link to="#">Contacts</Link>
                     </div>
                     <div className="footer-column">
                         <h3>Quick Links</h3>
-                        <a href="FAQ.html">FAQ</a>
-                        <a href="calculator.html">Calculator</a>
-                        <a href="aboutus.html">About Us</a>
+                        <Link to="/FAQ">FAQ</Link>
+                        <Link to="/calculator">Calculator</Link>
+                        <Link to="/aboutus">About Us</Link>
                     </div>
                     <div className="footer-column contact-info">
                         <h3>Contact Information</h3>
@@ -238,9 +247,9 @@ function Main() {
                 </div>
                 <h3 style={{ textAlign: 'center' }}>
                     Copyright © 2025, All Rights Reserved | Designed By{" "}
-                    <a style={{ color: 'rgb(207, 207, 207)' }} href="aboutus.html">
+                    <Link style={{ color: 'rgb(207, 207, 207)' }} to="/aboutus">
                         Legends Team
-                    </a>
+                    </Link>
                 </h3>
             </footer>
         </div>
