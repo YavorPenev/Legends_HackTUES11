@@ -100,12 +100,11 @@ function Main() {
                 </div>
             </header>
 
-            <a className="element_buttons" id="aibutton">AI</a>
-
-            <Carousel/>
+            <a className="element_buttons" id="aibutton">AI</a>            
 
             <div id="carousel-flex">
-                <div className="element" id="carousel-box"></div>
+                
+                <div className="element" id="carousel-box"><Carousel/></div>
                 <p id="promotext">At SmartFinance, we believe that financial education is the key to a secure and successful future. Our
                     platform is designed to simplify complex financial concepts, empowering you with the knowledge to make
                     informed decisions about saving, investing, budgeting, and more.
@@ -117,31 +116,7 @@ function Main() {
             </div>
 
 
-            <section className="features">
-                <h2>Why Choose Us?</h2>
-                <div id="feature-grid">
-                    <div className="element" id="feature-card">
-                        <h3>Calculate Your Finances</h3>
-                        <p>Use our advanced tools to calculate your income, expenses, and savings effortlessly.</p>
-                        <a href="../calculator.html" className="element_buttons" id="feature-button">Try Calculator</a>
-                    </div>
-
-                    <div className="element" id="feature-card">
-                        <h3>Get Personalized Advice</h3>
-                        <p>Receive expert financial advice tailored to your unique situation and goals.</p>
-                        <a href="../portfolio.html" className="element_buttons" id="feature-button">Get Advice</a>
-                    </div>
-
-
-                    <div className="element" id="feature-card">
-                        <h3>Plan Your Budget</h3>
-                        <p>Create and manage a budget that works for you, with tips to optimize your spending.</p>
-                        <a href="#budget-planning" className="element_buttons" id="feature-button">Start Planning</a>
-                    </div>
-
-
-                </div>
-            </section>
+            
 
             <div id="container" className="element">
                 <div className="cont">
@@ -197,6 +172,32 @@ function Main() {
                     </div>
                 </div>
             </div>
+
+            <section className="features">
+                <h2>Why Choose Us?</h2>
+                <div id="feature-grid">
+                    <div className="element" id="feature-card">
+                        <h3>Calculate Your Finances</h3>
+                        <p>Use our advanced tools to calculate your income, expenses, and savings effortlessly.</p>
+                        <a href="../calculator.html" className="element_buttons" id="feature-button">Try Calculator</a>
+                    </div>
+
+                    <div className="element" id="feature-card">
+                        <h3>Get Personalized Advice</h3>
+                        <p>Receive expert financial advice tailored to your unique situation and goals.</p>
+                        <a href="../portfolio.html" className="element_buttons" id="feature-button">Get Advice</a>
+                    </div>
+
+
+                    <div className="element" id="feature-card">
+                        <h3>Plan Your Budget</h3>
+                        <p>Create and manage a budget that works for you, with tips to optimize your spending.</p>
+                        <a href="#budget-planning" className="element_buttons" id="feature-button">Start Planning</a>
+                    </div>
+
+
+                </div>
+            </section>
 
             <footer>
                 <div className="footer-container">
