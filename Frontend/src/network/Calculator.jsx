@@ -12,10 +12,14 @@ function CalcPage() {
     const [interest, setInterest] = useState(0);
     const [months, setMonths] = useState(0);
     const [payment, setPayment] = useState(0);
+    const [interestPaid, setInterestPaid] = useState(0);
 
-    const loanChange = () => {
-        const result = Calc(loan, interest, months);
-        setPayment(result.toFixed(2));
+    const handleCalculate = () => {
+        const calculatedPayment = Calc(loan, interest, months);
+        setPayment(calculatedPayment.toFixed(2));
+
+        const calculatedInterestPaid = (calculatedPayment * months) - loan;
+        setInterestPaid(calculatedInterestPaid.toFixed(2));
     };
 
     return (
@@ -45,8 +49,12 @@ function CalcPage() {
                 </div>
                 <div>
                     <h3>Your monthly payment:</h3>
-                    <button onClick={loanChange}>Calculate</button>
+                    <button onClick={handleCalculate}>Calculate</button>
                     <h4 id="paymentfield">{payment}</h4>
+                </div>
+                <div>
+                    <h3>Total interest paid:</h3>
+                    <h4 id="interestpaidfield">{interestPaid}</h4>
                 </div>
             </div>
         </div>

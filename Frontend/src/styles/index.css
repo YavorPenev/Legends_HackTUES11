@@ -301,6 +301,25 @@ header {
     aspect-ratio: 1/1;
 }
 
+#aibutton
+{    
+    display: flex;
+    justify-content: center;
+    align-items: center;	
+    border-radius: 50%;
+    height: 70px;
+    width: 70px;
+    position: fixed;
+    bottom: 2%;
+    right: 3%;
+    border: 4px solid rgb(13, 0, 67);
+    box-shadow: 5px 1.5px 3px rgba(0, 0, 0, 0.325);
+    cursor: pointer;
+    font-size: 200%;
+    aspect-ratio: 1/1;
+    text-align: center;
+}
+
 /* Стилове за основното съдържание на страницата */
 .content {
     padding: 1.25rem;
@@ -326,7 +345,7 @@ header {
     border-radius: 10px;
     overflow: hidden;
     position: relative;
-    aspect-ratio: 16/10;
+    aspect-ratio: 16/8.5;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
     margin-bottom: 50px;
 }
