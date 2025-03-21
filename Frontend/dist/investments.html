@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment AI assistant</title>
+</head>
+<body>
+
+    <h2>Investment AI assistant</h2>
+
+    <label for="investment">Investment Amount ($):</label>
+    <input type="number" id="investment" required>
+
+    <label for="expected_return">Expected Return ($):</label>
+    <input type="number" id="expected_return" required>
+
+    <button onclick="evaluateInvestment()">Evaluate</button>
+
+    <p id="result"></p>
+
+    <script>
+        async function evaluateInvestment() {
+            const investment = document.getElementById("investment").value;
+            const expectedReturn = document.getElementById("expected_return").value;
+            const resultDiv = document.getElementById("result");
+
+            if (!investment || !expectedReturn) {
+                resultDiv.innerHTML = "Please enter all values.";
+                return;
+            }
+
+            // Replace with your correct backend URL
+            const response = await fetch('http://localhost:8000/investments', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    income: parseFloat(investment),  // Assuming 'investment' represents income here
+                    expenses: parseFloat(expectedReturn),  // Assuming 'expectedReturn' represents expenses here
+                    goals: ["Maximize growth"],  // Add more goals as needed
+                    stocks: ["AAPL", "GOOG", "AMZN"]  // Add the stock symbols you want to analyze
+                })
+            });
+
+            const data = await response.json();
+            resultDiv.innerHTML = `Investment Status: <strong>${data.advice}</strong>`;
+        }
+    </script>
+
+</body>
+</html>
