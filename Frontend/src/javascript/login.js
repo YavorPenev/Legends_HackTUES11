@@ -1,1 +1,0 @@
-// This file is no longer needed as the login functionality is handled in the React component.
