@@ -6,10 +6,7 @@ const path = require("path");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
-
-
 const nodemailer = require("nodemailer");
-const jwt = require("jsonwebtoken");
 const { OpenAI } = require("openai");
 
 const FINNHUB_API_KEY = process.env.FINNHUB_API_KEY;
@@ -35,7 +32,7 @@ db.connect((err) => {
 });
 
 function authenticateJWT(req, res, next) {
-    const token = req.header("Authorization")?.split(" ")[1]; // Тук трябва да извлечем токена
+    const token = req.header("Authorization")?.split(" ")[1]; // Extract token
     if (!token) return res.status(401).json({ error: "Unauthorized: No token provided" });
 
     try {
@@ -46,13 +43,6 @@ function authenticateJWT(req, res, next) {
         return res.status(403).json({ error: "Invalid or expired token" });
     }
 }
-
-const checkUser = "SELECT * FROM users WHERE email = ?";
-db.query(checkUser, [email], async (err, results) => {
-    if (results.length > 0) {
-        return res.status(400).json({ error: "Email already in use." });
-    }
-});
 
 //Frontend routes
 router.get("/", (req, res) => {
@@ -68,9 +58,7 @@ router.get("/signup", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "Frontend", "public", "signup.html"));
 });
 
-router.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "login.html"));
-});
+
 
 // Генериране на JWT токен
 function generateAuthToken(user) {
@@ -79,7 +67,7 @@ function generateAuthToken(user) {
         username: user.user_name
     };
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '1h' }); // Токенът изтича за 1 час
+    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '1h' }); // Token expires in 1 hour
     return token;
 }
 
@@ -147,7 +135,7 @@ async function getStockData(symbol) {
 async function getInvestmentAdvice(userProfile) {
     const stockSymbols = await fetchAllStockSymbols(); // Fetch all stock symbols
 
-    const stockDataPromises = stockSymbols.slice(0, 5).map(symbol => getStockData(symbol.symbol)); // ONly first 5 symbols
+    const stockDataPromises = stockSymbols.slice(0, 5).map(symbol => getStockData(symbol.symbol)); // Only first 5 symbols
 
     try {
         const stockData = await Promise.all(stockDataPromises);
@@ -228,7 +216,7 @@ router.post("/signup", async (req, res) => {
                 to: email,
                 subject: "Verification",
                 text: "Your email has been verified.",
-                html: "<b>You can visit us here:http://localhost:8000</b>",
+                html: `<b>You can visit us here: <a href="${verificationLink}">Verify Email</a></b>`,
             };
             try {
                 await transporter.sendMail(mailOptions);
