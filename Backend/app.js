@@ -4,6 +4,10 @@ const mysql = require("mysql2");
 const bcrypt = require("bcrypt");
 const path = require("path");
 const axios = require("axios");
+const jwt = require("jsonwebtoken");
+const expressJwt = require("express-jwt");
+
+
 const nodemailer = require("nodemailer");
 const { OpenAI } = require("openai");
 
@@ -39,7 +43,7 @@ db.query("SELECT 1", (err, results) => {
 
 //Frontend routes
 router.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "index.html"), (err) => {
+    res.sendFile(path.join(__dirname, "..", "Frontend", "index.html"), (err) => {
         if (err) {
             console.error("Error loading index.html:", err);
             res.status(500).json({ error: "Internal Server Error: Unable to load index.html" });
@@ -54,6 +58,17 @@ router.get("/signup", (req, res) => {
 router.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "Frontend", "public", "login.html"));
 });
+
+// Генериране на JWT токен
+function generateAuthToken(user) {
+    const payload = {
+        user_id: user.id,
+        username: user.user_name
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '1h' }); // Токенът изтича за 1 час
+    return token;
+}
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -211,7 +226,7 @@ router.post("/signup", async (req, res) => {
                 to: email,
                 subject: "Verification",
                 text: "Your email has been verified.",
-                html: "<b>Your email has been verified.</b>",
+                html: "<b>You can visit us here:http://localhost:8000</b>",
             };
 
             try {
