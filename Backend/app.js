@@ -6,8 +6,6 @@ const path = require("path");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
-
-
 const nodemailer = require("nodemailer");
 const { OpenAI } = require("openai");
 
@@ -33,17 +31,22 @@ db.connect((err) => {
     console.log("Connected to MySQL");
 });
 
-db.query("SELECT 1", (err, results) => {
-    if (err) {
-        console.error("Database connection failed:", err);
-    } else {
-        console.log("Database connection successful!");
+function authenticateJWT(req, res, next) {
+    const token = req.header("Authorization")?.split(" ")[1]; // Extract token
+    if (!token) return res.status(401).json({ error: "Unauthorized: No token provided" });
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (err) {
+        return res.status(403).json({ error: "Invalid or expired token" });
     }
-});
+}
 
 //Frontend routes
 router.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "Frontend", "index.html"), (err) => {
+    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "index.html"), (err) => {
         if (err) {
             console.error("Error loading index.html:", err);
             res.status(500).json({ error: "Internal Server Error: Unable to load index.html" });
@@ -55,9 +58,7 @@ router.get("/signup", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "Frontend", "public", "signup.html"));
 });
 
-router.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "login.html"));
-});
+
 
 // Генериране на JWT токен
 function generateAuthToken(user) {
@@ -66,7 +67,7 @@ function generateAuthToken(user) {
         username: user.user_name
     };
 
-    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '1h' }); // Токенът изтича за 1 час
+    const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: '1h' }); // Token expires in 1 hour
     return token;
 }
 
@@ -134,7 +135,7 @@ async function getStockData(symbol) {
 async function getInvestmentAdvice(userProfile) {
     const stockSymbols = await fetchAllStockSymbols(); // Fetch all stock symbols
 
-    const stockDataPromises = stockSymbols.slice(0, 5).map(symbol => getStockData(symbol.symbol)); // ONly first 5 symbols
+    const stockDataPromises = stockSymbols.slice(0, 5).map(symbol => getStockData(symbol.symbol)); // Only first 5 symbols
 
     try {
         const stockData = await Promise.all(stockDataPromises);
@@ -195,52 +196,36 @@ router.post("/advice", async (req, res) => {
 
 // Signup and Login Routes
 router.post("/signup", async (req, res) => {
-    console.log("Received request body:", req.body); // Debugging log
-
     const { username, password, email } = req.body;
-
     if (!username || !password || !email) {
         return res.status(400).json({ error: "All fields are required." });
     }
-
-    console.log("Extracted Email:", email); // Debugging log to check if email is extracted
-
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const sql = "INSERT INTO users (user_name, password, email) VALUES (?, ?, ?)";
-
+        const sql = "INSERT INTO users (user_name, password, email, is_verified) VALUES (?, ?, ?, 0)";
         db.query(sql, [username, hashedPassword, email], async (err, result) => {
             if (err) {
-                if (err.code === 'ER_DUP_ENTRY') {
-                    return res.status(400).json({ error: "Username or email already exists." });
-                }
-                console.error("Database error:", err);
                 return res.status(500).json({ error: "Database error occurred." });
             }
-
-            console.log("User registered with email:", email); // Debugging log
-
-            // Email configuration
+            // Generate verification token
+            const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "1h" });
+            const verificationLink = `http://localhost:3000/verify-email?token=${token}`;
+            
             const mailOptions = {
-                from: `"Legends" <${process.env.APP_USER}>`,
+                from: `Legends <${process.env.APP_USER}>`,
                 to: email,
                 subject: "Verification",
                 text: "Your email has been verified.",
-                html: "<b>You can visit us here:http://localhost:8000</b>",
+                html: `<b>You can visit us here: <a href="${verificationLink}">Verify Email</a></b>`,
             };
-
             try {
                 await transporter.sendMail(mailOptions);
-                console.log("✅ Verification email sent successfully to:", email);
+                res.status(200).json({ message: "Signup successful! Verification email sent." });
             } catch (error) {
-                console.error("❌ Error sending email:", error);
-                return res.status(500).json({ error: "Signup successful, but email could not be sent." });
+                res.status(500).json({ error: "Signup successful, but email could not be sent." });
             }
-
-            res.status(200).json({ message: "Signup successful! Verification email sent." });
         });
     } catch (err) {
-        console.error("Error during signup:", err);
         res.status(500).json({ error: "An error occurred. Please try again." });
     }
 });
