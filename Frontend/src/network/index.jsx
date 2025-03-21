@@ -106,11 +106,35 @@ function Carousel() {
     );
 }
 
+function ExtraElementBridge() {
+    useEffect(() => {
+        const updateTextColor = () => {
+            const infofields = document.getElementsByClassName('element');
 
+            Array.from(infofields).forEach((infofield) => {
+                const isBlueOrPurple = infofield.classList.contains('blueElement') || infofield.classList.contains('purpleElement');
+
+                const textfield = infofield.querySelector('.main-text');
+                if (textfield) {
+                    textfield.style.color = isBlueOrPurple ? 'white' : 'black';
+                }
+            });
+        };
+        updateTextColor();
+
+        const observer = new MutationObserver(updateTextColor);
+        observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class'] });
+
+        return () => observer.disconnect();
+    }, []);
+
+    return null;
+}
 
 createRoot(document.getElementById('rootmain')).render(
     <StrictMode>
         <ThemeChange />
+        <ExtraElementBridge />
     </StrictMode>
 )
 
