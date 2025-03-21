@@ -7,24 +7,22 @@ const axios = require("axios");
 const nodemailer = require("nodemailer");
 const { OpenAI } = require("openai");
 
-const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_API_KEY;
-const BASE_URL = "https://www.alphavantage.co/query";
-
+const FINNHUB_API_KEY = process.env.FINNHUB_API_KEY;
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
+    apiKey: process.env.OPENAI_API_KEY,
 });
+console.log("OpenAI API Key:", process.env.OPENAI_API_KEY);
 
 const router = express.Router();
 
-// MySQL Database Connection
+//Connection with our database
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    port: process.env.DB_PORT
-  });
-
+    port: process.env.DB_PORT,
+});
 
 db.connect((err) => {
     if (err) throw err;
@@ -39,9 +37,9 @@ db.query("SELECT 1", (err, results) => {
     }
 });
 
-// Serve Frontend Pages
+//Frontend routes
 router.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "Frontend", "index.html"), (err) => {
+    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "index.html"), (err) => {
         if (err) {
             console.error("Error loading index.html:", err);
             res.status(500).json({ error: "Internal Server Error: Unable to load index.html" });
@@ -64,10 +62,123 @@ const transporter = nodemailer.createTransport({
         pass: process.env.APP_PASS,
     },
     tls: {
-        rejectUnauthorized: false, // Ignore self-signed certificate errors
+        rejectUnauthorized: false,
     }
 });
 
+// Function to fetch all stock symbols from Finnhub API - only 27752 work for now
+async function fetchAllStockSymbols() {
+    const exchanges = [
+        "US",    // United States (NASDAQ, NYSE, etc.)
+        "LSE",   // London Stock Exchange
+        "HKEX",  // Hong Kong Stock Exchange
+        "BSE",   // Bombay Stock Exchange
+        "SSE",   // Shanghai Stock Exchange
+        "TSE",   // Tokyo Stock Exchange
+        "KOSDAQ" // KOSDAQ (South Korea)
+    ];
+
+    let allSymbols = [];
+
+    for (const exchange of exchanges) {
+        try {
+            const response = await axios.get(`https://finnhub.io/api/v1/stock/symbol?exchange=${exchange}&token=${FINNHUB_API_KEY}`);
+            const symbols = response.data;
+            allSymbols = [...allSymbols, ...symbols];
+            console.log(`Fetched ${symbols.length} symbols from exchange: ${exchange}`);
+        } catch (error) {
+            console.error(`Error fetching stock symbols for exchange ${exchange}:`, error.message);
+        }
+    }
+
+    console.log('Total symbols fetched:', allSymbols.length);
+    return allSymbols;
+}
+
+async function getStockData(symbol) {
+    try {
+        const response = await axios.get(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FINNHUB_API_KEY}`);
+        const data = response.data;
+
+        if (!data) throw new Error("No data found for symbol");
+
+        return {
+            symbol: symbol,
+            currentPrice: data.c,
+            high: data.h,
+            low: data.l,
+            open: data.o,
+            close: data.pc,
+        };
+    } catch (err) {
+        console.error("Error fetching stock data:", err.message);
+        return null;
+    }
+}
+
+async function getInvestmentAdvice(userProfile) {
+    const stockSymbols = await fetchAllStockSymbols(); // Fetch all stock symbols
+
+    const stockDataPromises = stockSymbols.slice(0, 5).map(symbol => getStockData(symbol.symbol)); // ONly first 5 symbols
+
+    try {
+        const stockData = await Promise.all(stockDataPromises);
+        const filteredStockData = stockData.filter(data => data !== null);
+
+        const prompt = `
+        Based on the following stock data for the given stocks:
+
+        ${filteredStockData.map(data => `
+        Stock: ${data.symbol}
+        Current Price: ${data.currentPrice}
+        High: ${data.high}
+        Low: ${data.low}
+        Open: ${data.open}
+        Close: ${data.close}`).join("\n")}
+
+        and the user's financial profile:
+        Income: ${userProfile.income}
+        Expenses: ${userProfile.expenses}
+        Goals: ${userProfile.goals.join(", ")}
+
+        Provide a detailed recommendation on which stock(s) would be the best investment for the user.
+        Consider factors such as stock performance, risk, and user preferences.
+        `;
+
+        const response = await openai.chat.completions.create({
+            model: "gpt-4",
+            messages: [{ role: "user", content: prompt }],
+        });
+
+        return response.choices[0].message.content;
+    } catch (err) {
+        console.error("Error getting investment advice:", err.message);
+        return "An error occurred while processing the investment advice.";
+    }
+}
+
+// Frontend routes
+router.get("/advice", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "advice.html"));
+});
+
+router.post("/advice", async (req, res) => {
+    const { userProfile } = req.body;
+
+    if (!userProfile) {
+        return res.status(400).json({ error: "User profile is required." });
+    }
+
+    try {
+        const advice = await getInvestmentAdvice(userProfile);
+        res.status(200).json({ advice });
+    } catch (err) {
+        console.error("Error processing request:", err.message);
+        res.status(500).json({ error: "Internal server error." });
+    }
+});
+
+// Signup and Login Routes
 router.post("/signup", async (req, res) => {
     console.log("Received request body:", req.body); // Debugging log
 
@@ -99,8 +210,8 @@ router.post("/signup", async (req, res) => {
                 from: `"Legends" <${process.env.APP_USER}>`,
                 to: email,
                 subject: "Verification",
-                text: `Your email has been verified. Visit our homepage: http://localhost:8000`,
-                html: `<b>Your email has been verified.</b><br><a href="http://localhost:8000">Visit our homepage</a>`,
+                text: "Your email has been verified.",
+                html: "<b>Your email has been verified.</b>",
             };
 
             try {
@@ -118,8 +229,6 @@ router.post("/signup", async (req, res) => {
         res.status(500).json({ error: "An error occurred. Please try again." });
     }
 });
-
-
 
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
@@ -150,100 +259,9 @@ router.post("/login", async (req, res) => {
     }
 });
 
-// Fetch Stock Data from Alpha Vantage
-async function getStockData(symbol) {
-    try {
-        const response = await axios.get(BASE_URL, {
-            params: {
-                function: "TIME_SERIES_DAILY",
-                symbol: symbol,
-                apikey: ALPHA_VANTAGE_API_KEY
-            }
-        });
-
-        const timeSeries = response.data["Time Series (Daily)"];
-        if (!timeSeries) throw new Error("Invalid API response");
-
-        const latestDate = Object.keys(timeSeries)[0];
-        const stockInfo = timeSeries[latestDate];
-
-        return {
-            symbol,
-            date: latestDate,
-            open: stockInfo["1. open"],
-            high: stockInfo["2. high"],
-            low: stockInfo["3. low"],
-            close: stockInfo["4. close"],
-            volume: stockInfo["5. volume"]
-        };
-    } catch (err) {
-        console.error("Error fetching stock data:", err.message);
-        return null;
-    }
-}
-
-// Get Investment Advice from OpenAI based on stock data
-async function getInvestmentAdvice(userProfile) {
-    const stockSymbols = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"]; // Example stock symbols to analyze
-
-    const stockDataPromises = stockSymbols.map(symbol => getStockData(symbol));
-
-    try {
-        const stockData = await Promise.all(stockDataPromises);
-        const filteredStockData = stockData.filter(data => data !== null);
-
-        const prompt = `
-        Based on the following stock data from the past 5 days for the given stocks:
-
-        ${filteredStockData.map(data => `
-        Stock: ${data.symbol}
-        Date: ${data.date}
-        Open: ${data.open}
-        High: ${data.high}
-        Low: ${data.low}
-        Close: ${data.close}
-        Volume: ${data.volume}`).join("\n")}
-
-        and the user's financial profile:
-        Income: ${userProfile.income}
-        Expenses: ${userProfile.expenses}
-        Goals: ${userProfile.goals.join(", ")}
-
-        Provide a detailed recommendation on which stock(s) would be the best investment for the user.
-        Consider factors such as stock performance, risk, and user preferences.
-        `;
-
-        const response = await openai.chat.completions.create({
-            model: "gpt-4",
-            messages: [{ role: "user", content: prompt }]
-        });
-
-        return response.choices[0].message.content;
-    } catch (err) {
-        console.error("Error getting investment advice:", err.message);
-        return "An error occurred while processing the investment advice.";
-    }
-}
-
-// Frontend routes
-router.get("/advice", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "Frontend","Public", "advice.html"));
-});
-
-router.post("/advice", async (req, res) => {
-    const { userProfile } = req.body;
-
-    if (!userProfile) {
-        return res.status(400).json({ error: "User profile is required." });
-    }
-
-    try {
-        const advice = await getInvestmentAdvice(userProfile);
-        res.status(200).json({ advice });
-    } catch (err) {
-        console.error("Error processing request:", err.message);
-        res.status(500).json({ error: "Internal server error." });
-    }
-});
-
 module.exports = router;
+
+
+
+
+
