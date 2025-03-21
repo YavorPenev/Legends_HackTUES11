@@ -1,6 +1,5 @@
-import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, StrictMode } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink, Link } from "react-router";
 import Carousel from './parts/carousel';
 import ThemeChange from './parts/ThemeChange';
@@ -28,23 +27,33 @@ function ClosePopup() {
 
 function ExtraElementBridge() {
     useEffect(() => {
+        // Function to update text color based on the theme
         const updateTextColor = () => {
             const infofields = document.getElementsByClassName('element');
 
             Array.from(infofields).forEach((infofield) => {
                 const isBlueOrPurple = infofield.classList.contains('blueElement') || infofield.classList.contains('purpleElement');
-
                 const textfield = infofield.querySelector('.main-text');
+
                 if (textfield) {
+                    // Set text color based on theme class presence
                     textfield.style.color = isBlueOrPurple ? 'white' : 'black';
                 }
             });
         };
+
+        // Initial check to update text color based on existing theme
         updateTextColor();
 
+        // Listen for changes in the DOM (theme changes)
         const observer = new MutationObserver(updateTextColor);
-        observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['className'] });
+        observer.observe(document.body, {
+            attributes: true,
+            subtree: true,
+            attributeFilter: ['class'] // Monitor class changes
+        });
 
+        // Clean up observer when the component is unmounted
         return () => observer.disconnect();
     }, []);
 
@@ -60,6 +69,7 @@ function Main() {
 
     return (
         <div>
+            <ExtraElementBridge />
             <header className="element">
                 <div className="header-left">
                     <button id="menu-button" className="element_buttons" onClick={toggleMenu}>
@@ -122,15 +132,14 @@ function Main() {
 
             </div>
 
-
-
-
             <div id="container" className="element">
                 <div className="cont">
                     <div className="content">
-                        <Link className="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
+
+                        <Link className="image-box" to="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
                             <img className="image" src="/images.jfif" alt="1" />
                         </Link>
+
                         <div className="main-text" id="main-text">
                             <h1>Budgeting: The Path to Smarter Financial Decisions</h1>
                             <p>Budgeting is not just Link tool for managing finances – it is Link way of life that helps you achieve
@@ -146,7 +155,7 @@ function Main() {
             <div id="container" className="element">
                 <div className="cont">
                     <div className="content">
-                        <Link className="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
+                        <Link className="image-box" to="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
                             <img className="image" src="/images3.webp" alt="1" />
                         </Link>
                         <div className="main-text" id="main-text">
@@ -165,7 +174,7 @@ function Main() {
             <div id="container" className="element">
                 <div className="cont">
                     <div className="content">
-                        <Link className="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
+                        <Link className="image-box" to="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
                             <img className="image" src="/images2.jfif" alt="1" />
                         </Link>
                         <div className="main-text" id="main-text">
@@ -186,7 +195,7 @@ function Main() {
                     <div className="element" id="feature-card">
                         <h3>Calculate Your Finances</h3>
                         <p>Use our advanced tools to calculate your income, expenses, and savings effortlessly.</p>
-                        <Link href="../calculator.html" className="element_buttons" id="feature-button">Try Calculator</Link>
+                        <Link to="/calculator" className="element_buttons" id="feature-button">Try Calculator</Link>
                     </div>
 
                     <div className="element" id="feature-card">

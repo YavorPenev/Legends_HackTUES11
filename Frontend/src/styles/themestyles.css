@@ -68,6 +68,7 @@
 
 
 
+
 .blueElement {
     background-color: rgb(31, 2, 84);
     color: white;
@@ -76,6 +77,26 @@
 .whiteElement {
     background-color: white;
     color: black;
+}
+
+.blueElement h3, .purpleElement h3 {
+    color: white; 
+}
+
+.blueElement p, .purpleElement p {
+    color: white; 
+}
+
+.blueElement h3, .purpleElement h3 {
+    color: white;
+}
+
+body.blueElement .feature-card h3, body.purpleElement .feature-card h3 {
+    color: white;
+}
+
+body.blueElement .feature-card p, body.purpleElement .feature-card p {
+    color: white;
 }
 
 /*End of react styles*/
