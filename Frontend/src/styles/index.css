@@ -28,11 +28,13 @@ body {
 #side-menu {
     position: fixed;
     top: 0;
-    left: -258px; /* Hidden by default */
+    left: -258px;
+    /* Hidden by default */
     width: 250px;
     height: 100%;
     color: white;
-    transition: left 0.3s ease; /* Smooth sliding effect */
+    transition: left 0.3s ease;
+    /* Smooth sliding effect */
     z-index: 1000;
     border-right: 8px solid black;
 }
@@ -65,14 +67,14 @@ body {
     margin: 10px;
 }
 
-#closebutton{
+#closebutton {
     background-color: white;
     color: black;
     border: none;
     border-radius: 5px;
 }
 
-#closebutton:hover{
+#closebutton:hover {
     transition: transform 0.3s ease;
     background-color: #555;
 }
@@ -112,7 +114,7 @@ header {
     align-items: center;
     padding: 1rem 1.25rem;
     z-index: 1000;
-    height: 10%;
+    height: 6%;
     border-bottom: 7px solid black;
 }
 
@@ -124,11 +126,13 @@ header {
     flex-direction: row;
     justify-content: flex-start;
     gap: 2rem;
-    height: 100%;;
+    height: 100%;
+    ;
 }
 
-.logo{
-    height: 100%;;
+.logo {
+    height: 100%;
+    ;
 }
 
 /* Стилове за логото */
@@ -156,8 +160,9 @@ header {
     align-content: center;
     align-items: center;
     flex: 1;
-    gap:5%;
-    margin-right: 5%
+    gap: 5%;
+    margin-right: 5%;
+    height: 100%;
 }
 
 /* Стилове за бутоните в дясната част */
@@ -172,37 +177,128 @@ header {
     cursor: pointer;
 }
 
-#rootmain{
+#rootmain {
     height: 100%;
     font-size: 200%;
+    aspect-ratio: 1/1;
+    ;
 }
 
-#themebox{
+#themebox {
+    height: 100%;
+    aspect-ratio: 1/1;
+}
+
+#contactsbuttons {
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+/* Стилове за основния бутон */
+.open-popup-btn {
+    padding: 12px 27px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.open-popup-btn:hover {
+    background-color: #45a049;
+}
+
+/* Стилове за изскачащия прозорец */
+.popup-overlay {
+    display: none;
+    /* Скрит по подразбиране */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.popup {
+    display: none;
+    /* Скрит по подразбиране */
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 1000;
+}
+
+.popup h2 {
+    margin-top: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.popup p {
+    font-size: 16px;
+    color: #555;
+    margin: 10px 0;
+}
+
+.popup button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: none;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.popup button:hover {
+    background-color: #787878;
+}
+
+#login {
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+#signup {
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+#account {
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
     height: 100%;
 }
 
-#login{
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 10px;
-}
-
-#signup{
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 10px;
-}
-
-#account{
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 10px;
+#accountlogo
+{
+    height: 100%;
+    aspect-ratio: 1/1;
 }
 
 /* Стилове за основното съдържание на страницата */
@@ -214,27 +310,33 @@ header {
 }
 
 #carousel-box {
-    width: 60%; /* Ограничете ширината на карусела */
-    margin: 0 auto; /* Центрирайте карусела */
+    width: 60%;
+    /* Ограничете ширината на карусела */
+    margin: 0 auto;
+    /* Центрирайте карусела */
     margin-top: 10%;
-    position: relative; /* Уверете се, че позиционирането е правилно */
-  }
-  
-  #carousel {
-    width: 100%; /* Уверете се, че каруселът заема цялата ширина на кутията */
+    position: relative;
+    /* Уверете се, че позиционирането е правилно */
+    border-radius: 10px;
+}
+
+#carousel {
+    width: 100%;
+    /* Уверете се, че каруселът заема цялата ширина на кутията */
     border-radius: 10px;
     overflow: hidden;
     position: relative;
     aspect-ratio: 16/10;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
     margin-bottom: 50px;
-  }
-  
-  .slide {
+}
+
+.slide {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 100%; /* Уверете се, че слайдовете заемат цялата ширина на карусела */
+    width: 100%;
+    /* Уверете се, че слайдовете заемат цялата ширина на карусела */
     height: max-content;
     font-size: 1rem;
     font-weight: bold;
@@ -243,33 +345,35 @@ header {
     position: absolute;
     transform: translateX(100%);
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    padding: 3% 18% 10% 18%; /* Използвайте проценти за отстоянията */
-  }
-  
-  .slide.active {
+    padding: 3% 18% 10% 18%;
+    /* Използвайте проценти за отстоянията */
+    border-radius: 10px;
+}
+
+.slide.active {
     opacity: 1;
     transform: translateX(0);
-  }
-  
-  .slide.inactive {
+}
+
+.slide.inactive {
     opacity: 0;
     transform: translateX(-100%);
-  }
-  
-  .infoContainer {
+}
+
+.infoContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
     gap: 8%;
-  }
-  
-  .carHeader {
+}
+
+.carHeader {
     margin: 0px;
-  }
-  
-  #prev,
-  #next {
+}
+
+#prev,
+#next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -281,53 +385,56 @@ header {
     border-radius: 15%;
     height: 60px;
     width: 60px;
-  }
-  
-  #prev {
+}
+
+#prev {
     left: 5%;
-  }
-  
-  #next {
+}
+
+#next {
     right: 5%;
-  }
-  
-  #prev:hover,
-  #next:hover {
+}
+
+#prev:hover,
+#next:hover {
     background-color: gray;
     transform: translateY(-50%) scale(1.1);
     transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  #navbut {
+}
+
+#navbut {
     display: flex;
     justify-content: center;
     position: absolute;
-    bottom: 10px; /* Позиционирайте точките отдолу */
+    bottom: 10px;
+    /* Позиционирайте точките отдолу */
     width: 100%;
     gap: 1%;
-  }
-  
-  #navbutt {
-    background-color: var(--button-bg-color, #ccc); /* Default color */
-    color: var(--button-text-color, #000); /* Default text color */
+}
+
+#navbutt {
+    background-color: var(--button-bg-color, #ccc);
+    /* Default color */
+    color: var(--button-text-color, #000);
+    /* Default text color */
     border: none;
     border-radius: 50%;
     width: 20px;
     height: 20px;
     transition: background-color 0.3s ease, color 0.3s ease;
     cursor: pointer;
-  }
-  
-  #navbutt:hover {
+}
+
+#navbutt:hover {
     background-color: rgba(69, 69, 69, 0.786);
-  }
-  
-  #navbutt.active {
+}
+
+#navbutt.active {
     background-color: var(--button-active-bg-color, rgba(69, 69, 69, 0.786));
     color: var(--button-active-text-color, #fff);
-  }
-#themebutton
-{
+}
+
+#themebutton {
     border: none;
     padding: 10px 15px;
     cursor: pointer;
@@ -425,3 +532,46 @@ header {
 }
 
 /*End of react styles*/
+
+
+/* Footer */
+footer {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    color: white;
+    padding: 30px 0;
+    text-align: left;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.footer-column {
+    flex: 1;
+    margin: 0 15px;
+}
+
+.footer-column h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.footer-column a {
+    color: #ddd;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.footer-column a:hover {
+    color: #fff;
+}
+
+.footer-column .contact-info p {
+    margin: 5px 0;
+}

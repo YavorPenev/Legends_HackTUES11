@@ -13,13 +13,14 @@
     <header class="element">
         <div class="header-left">
             <!-- Бутон за отваряне на менюто -->
-            <button id="menu-button" class = "element_buttons" onclick="toggleMenu()">☰ Menu</button>
+            <button id="menu-button" class="element_buttons" onclick="toggleMenu()">☰&nbsp;Menu</button>
 
             <!-- Страничното меню -->
             <div class="element" id="side-menu">
                 <button class="close-button" id="closebutton" onclick="toggleMenu()">✖</button>
                 <div class="menu-content">
-                    <button class="menu-item element_buttons" onclick=""><a href="calculator.html" id="buttonlink">Loan Calculator</a></button>
+                    <button class="menu-item element_buttons" onclick=""><a href="calculator.html" id="buttonlink">Loan
+                            Calculator</a></button>
                     <button class="menu-item element_buttons">About Us</button>
                     <button class="menu-item element_buttons">My Portfolio</button>
                     <button class="menu-item element_buttons">Contacts</button>
@@ -40,22 +41,100 @@
             <div id="rootmain"></div>
 
             <div class="logo">
-                <img src="public/logo.png" alt="Logo">
+                <img alt="Logo">
             </div>
         </div>
 
         <!-- Дясна част: Бутони -->
         <div class="header-right">
+
+            <!-- Основен бутон за отваряне на изскачащия прозорец -->
+            <button class="element_buttons" id="contactsbuttons" onclick="openPopup()">Contacts</button>
+
+            <!-- Изскачащ прозорец -->
+            <div class="popup-overlay" id="popup-overlay"></div>
+            <div class="popup" id="popup">
+                <button onclick="closePopup()">✖</button>
+                <h2>Contacts</h2>
+                <p>These are some contacts</p>
+            </div>
+
+            <script>
+                function openPopup() {
+                    document.getElementById('popup').style.display = 'block';
+                    document.getElementById('popup-overlay').style.display = 'block';
+                }
+
+                function closePopup() {
+                    document.getElementById('popup').style.display = 'none';
+                    document.getElementById('popup-overlay').style.display = 'none';
+                }
+
+                function updateAccountLogo() {
+                    const accountButton = document.getElementById('account'); // Get the button by ID
+                    const accountLogo = document.getElementById('accountlogo'); // Get the logo image by ID
+
+                    if (accountButton.classList.contains('whiteButton')) {
+                        accountLogo.src = "proficonblack.png"; // Set black icon
+                    } else if (accountButton.classList.contains('blueButton') || accountButton.classList.contains('purpleButton')) {
+                        accountLogo.src = "proficonwhite.png"; // Set white icon
+                    } else {
+                        accountLogo.src = "proficon.png";
+                    }
+                }
+
+                // Call the function initially to set the correct logo
+                updateAccountLogo();
+
+                // Add a MutationObserver to watch for class changes on the button
+                const accountButton = document.getElementById('account');
+                const observer = new MutationObserver(updateAccountLogo);
+
+                observer.observe(accountButton, { attributes: true, attributeFilter: ['class'] });
+            </script>
+
             <button type="button" class="element_buttons" id="login">Login</button>
             <button type="button" class="element_buttons" id="signup">Signup</button>
-            <button type="button" class="element_buttons" id="account">My Account</button>
+            <button type="button" class="element_buttons" id="account"><img id="accountlogo"
+                    src="public/proficon.png"></button>
         </div>
     </header>
 
     <div id="root"></div>
-    
+
     <div class="element" id="carousel-box"></div>
-    
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About the Website</h3>
+                <p>This is an example website to demonstrate a footer layout.</p>
+                <p>Here you can find various examples and useful information.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Navigation</h3>
+                <a href="#">Home</a>
+                <a href="#">Products</a>
+                <a href="#">Services</a>
+                <a href="#">About Us</a>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="#">FAQ</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-column contact-info">
+                <h3>Contact Information</h3>
+                <p><strong>Address:</strong> Sofia, Bulgaria</p>
+                <p><strong>Phone:</strong> +359 88 123 4567</p>
+                <p><strong>Email:</strong> example@domain.com</p>
+            </div>
+        </div>
+        <h3 style="text-align: center;">Copyright © 2025, All Rights Reserved | Designed With by <a
+                style=" color: rgb(207, 207, 207);" href="#">Legends Team</a></h3>
+    </footer>
 </body>
 
 </html>
