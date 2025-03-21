@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./styles/login.css";
 import { createRoot } from 'react-dom/client';
 import { StrictMode } from "react";
 import { NavLink } from "react-router";
@@ -37,6 +38,7 @@ function Login() {
     };
 
     return (
+        
         <div className="input-box">
             <h1>Login:</h1>
             <div className="info">
