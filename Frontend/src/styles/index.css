@@ -318,6 +318,7 @@ header {
     font-size: 200%;
     aspect-ratio: 1/1;
     text-align: center;
+    z-index: 1001;
 }
 
 /* Стилове за основното съдържание на страницата */
@@ -470,87 +471,7 @@ header {
 
 
 
-/*From here begin the react styles:*/
 
-.main_buttons {
-    border: none;
-    height: fit-content;
-    width: max-content;
-    font-size: 150%;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-}
-
-.main_buttons:hover {
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-}
-
-
-
-.blueBackground {
-    background-color: rgb(48, 0, 74);
-    color: white;
-}
-
-.whiteBackground {
-    background-color: white;
-    color: black;
-}
-
-.purpleBackground {
-    background-color: rgb(91, 0, 117);
-    color: white;
-}
-
-
-.blueButton {
-    background-color: rgb(31, 0, 90);
-    color: white;
-}
-
-.blueButton:hover {
-    background-color: rgb(59, 11, 148);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.whiteButton {
-    background-color: white;
-    color: black;
-}
-
-.whiteButton:hover {
-    background-color: rgb(149, 149, 149);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.purpleButton {
-    background-color: rgb(68, 0, 127);
-    color: white;
-}
-
-.purpleButton:hover {
-    background-color: rgb(90, 0, 170);
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-
-
-
-.blueElement {
-    background-color: rgb(31, 2, 84);
-    color: white;
-}
-
-.whiteElement {
-    background-color: white;
-    color: black;
-}
-
-/*End of react styles*/
 
 
 .features {
