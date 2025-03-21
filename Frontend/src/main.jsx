@@ -1,9 +1,26 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router";
 import ThemeChange from './parts/ThemeChange';
-import "./styles/themestyles.css"
-import { NavLink } from "react-router";
+import Calculator from './calculator';
+import Login from './login';
+import "./styles/themestyles.css";
+
+function toggleMenu() {
+    const menu = document.getElementById("side-menu");
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+function openPopup() {
+    const popup = document.getElementById("popup");
+    popup.style.display = "block";
+}
+
+function closePopup() {
+    const popup = document.getElementById("popup");
+    popup.style.display = "none";
+}
 
 function ExtraElementBridge() {
     useEffect(() => {
@@ -35,13 +52,18 @@ function Main() {
         <div>
             <header className="element">
                 <div className="header-left">
-                    <button id="menu-button" className="element_buttons" onclick="toggleMenu()">☰&nbsp;Menu</button>
+                    <button id="menu-button" className="element_buttons" onClick={toggleMenu}>
+                        ☰&nbsp;Menu
+                    </button>
 
                     <div className="element" id="side-menu">
-                        <button className="close-button" id="closebutton" onclick="toggleMenu()">✖</button>
+                        <button className="close-button" id="closebutton" onClick={toggleMenu}>
+                            ✖
+                        </button>
                         <div className="menu-content">
-                            <button className="menu-item element_buttons" onclick=""><a href="calculator.html" id="buttonlink">Loan
-                                Calculator</a></button>
+                            <button className="menu-item element_buttons">
+                                <a href="/calcPage" id="buttonlink">Loan Calculator</a>
+                            </button>
                             <button className="menu-item element_buttons">About Us</button>
                             <button className="menu-item element_buttons">My Portfolio</button>
                             <button className="menu-item element_buttons">Contacts</button>
@@ -54,19 +76,22 @@ function Main() {
                 </div>
 
                 <div className="header-right">
-                    <button className="element_buttons" id="contactsbuttons" onclick="openPopup()">Contacts</button>
+                    <button className="element_buttons" id="contactsbuttons" onClick={openPopup}>
+                        Contacts
+                    </button>
                     <button type="button" className="element_buttons" id="login">Login</button>
                     <button type="button" className="element_buttons" id="signup">Signup</button>
 
                     <div className="popup-overlay" id="popup-overlay"></div>
                     <div className="popup" id="popup">
-                        <button onclick="closePopup()">✖</button>
+                        <button onClick={closePopup}>✖</button>
                         <h2>Contacts</h2>
                         <p>These are some contacts</p>
                     </div>
 
-                    <button id="profilebutton" className="element_buttons"><img id="profilepic" src="proficon.png" /></button>
-
+                    <button id="profilebutton" className="element_buttons">
+                        <img id="profilepic" src="proficon.png" />
+                    </button>
                 </div>
             </header>
 
@@ -191,8 +216,12 @@ function Main() {
                         <p><strong>Email:</strong> yavorpen@gmail.com</p>
                     </div>
                 </div>
-                <h3 style="text-align: center;">Copyright © 2025, All Rights Reserved | Designed By <a
-                    style=" color: rgb(207, 207, 207);" href="aboutus.html">Legends Team</a></h3>
+                <h3 style={{ textAlign: "center" }}>
+                    Copyright © 2025, All Rights Reserved | Designed By{" "}
+                    <a style={{ color: "rgb(207, 207, 207)" }} href="aboutus.html">
+                        Legends Team
+                    </a>
+                </h3>
             </footer>
         </div>
     );
@@ -202,10 +231,9 @@ function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/main" element={<Main />} />
-                <Route path="/calcPage" element={<ThemeChange />} />
-                <Route path="/util" element={<ExtraElementBridge />} />
+                <Route path="/" element={<Main />} />
+                <Route path="/calcPage" element={<Calculator />} />
+                <Route path="/login" element={<Login />} />
             </Routes>
         </Router>
     );

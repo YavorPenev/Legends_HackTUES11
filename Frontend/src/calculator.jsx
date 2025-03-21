@@ -1,13 +1,14 @@
-import { StrictMode, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
-import '../styles/calculator.css';
-import React from 'react';
-import Calc from '../parts/CalcLogic.jsx';
-import Util from '../parts/Util.jsx';
-import ThemeChange from './ThemeChange.jsx';
-import { NavLink, Route, Router, Routes, Link, Navigate} from "react-router";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./styles/calculator.css";
 
-
+function Calc(loan, interest, months) {
+  const minterest = interest / 100 / 12;
+  const payment =
+    (loan * minterest * Math.pow(1 + minterest, months)) /
+    (Math.pow(1 + minterest, months) - 1);
+  return payment;
+}
 
 function CalcPage() {
   const [loan, setLoan] = useState(0);
@@ -20,43 +21,50 @@ function CalcPage() {
     const calculatedPayment = Calc(loan, interest, months);
     setPayment(calculatedPayment.toFixed(2));
 
-    const calculatedInterestPaid = (calculatedPayment * months) - loan;
+    const calculatedInterestPaid = calculatedPayment * months - loan;
     setInterestPaid(calculatedInterestPaid.toFixed(2));
   };
 
-  return (loan, interest, months, payment, interestPaid);
-}
-
-function Main() {
   return (
     <div>
       <div id="wholepage">
-        <h1 className="element" id="pagename">Advanced Loan Calculator</h1>
+        <h1 className="element" id="pagename">
+          Advanced Loan Calculator
+        </h1>
         <div id="calculatorbox">
           <div id="leftbox" className="element">
             <h2>Enter your loan details:</h2>
-            <input id="loaninput"
+            <input
+              id="loaninput"
               className="element_buttons"
               type="number"
               value={loan}
               onChange={(e) => setLoan(Number(e.target.value))}
               placeholder="Loan Amount..."
             />
-            <input id="interestinput"
+            <input
+              id="interestinput"
               className="element_buttons"
               type="number"
               value={interest}
               onChange={(e) => setInterest(Number(e.target.value))}
               placeholder="Yearly Interest Rate ..."
             />
-            <input id="monthsinput"
+            <input
+              id="monthsinput"
               className="element_buttons"
               type="number"
               value={months}
               onChange={(e) => setMonths(Number(e.target.value))}
               placeholder="Months of Payment..."
             />
-            <button className="element_buttons" id="calculatebutton" onClick={handleCalculate}>Calculate</button>
+            <button
+              className="element_buttons"
+              id="calculatebutton"
+              onClick={handleCalculate}
+            >
+              Calculate
+            </button>
           </div>
           <div id="rightbox">
             <div id="paymentbox" className="element">
@@ -71,44 +79,63 @@ function Main() {
         </div>
       </div>
       <footer>
-        <div class="footer-container">
-          <div class="footer-column">
+        <div className="footer-container">
+          <div className="footer-column">
             <h3>About the Website</h3>
-            <p>This is <b>the</b> website for business insight and the path to success.</p>
-            <p>Here you can find various tools to enhance your entrepreneurial skills.</p>
+            <p>
+              This is <b>the</b> website for business insight and the path to
+              success.
+            </p>
+            <p>
+              Here you can find various tools to enhance your entrepreneurial
+              skills.
+            </p>
           </div>
-          <div class="footer-column">
+          <div className="footer-column">
             <h3>Navigation</h3>
             <a href="#">Home</a>
             <a href="#">Contacts</a>
           </div>
-          <div class="footer-column">
+          <div className="footer-column">
             <h3>Quick Links</h3>
             <a href="FAQ.html">FAQ</a>
             <a href="calculator.html">Calculator</a>
             <a href="aboutus.html">About Us</a>
           </div>
-          <div class="footer-column contact-info">
+          <div className="footer-column contact-info">
             <h3>Contact Information</h3>
-            <p><strong>Address:</strong> Sofia, Bulgaria</p>
-            <p><strong>Phone:</strong> +359 88 123 4567</p>
-            <p><strong>Email:</strong> yavorpen@gmail.com</p>
+            <p>
+              <strong>Address:</strong> Sofia, Bulgaria
+            </p>
+            <p>
+              <strong>Phone:</strong> +359 88 123 4567
+            </p>
+            <p>
+              <strong>Email:</strong> yavorpen@gmail.com
+            </p>
           </div>
         </div>
-        <h3 style="text-align: center;">Copyright © 2025, All Rights Reserved | Designed By <a
-          style=" color: rgb(207, 207, 207);" href="aboutus.html">Legends Team</a></h3>
+        <h3 style="text-align: center;">
+          Copyright © 2025, All Rights Reserved | Designed By{" "}
+          <a style={{ color: "rgb(207, 207, 207)" }} href="aboutus.html">
+            Legends Team
+          </a>
+        </h3>
       </footer>
     </div>
   );
 }
 
-
-function App() {
+function Calculator() {
   return (
     <Router>
-        <Route path="/calculator" element={<Main/>} />
+      <Routes>
+        <Route path="/calculator" element={<CalcPage />} />
+      </Routes>
     </Router>
   );
 }
 
-createRoot(document.getElementById('root')).render(<App/>);
+export default Calculator;
+
+

@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { StrictMode } from "react";
 import { NavLink } from "react-router";
 
-function RenderHTML() {
+function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -54,10 +54,5 @@ function RenderHTML() {
     );
 }
 
-createRoot(document.getElementById('root')).render(
-    <StrictMode>
-        <RenderHTML />
-    </StrictMode>
-);
-
+export default Login;
 
