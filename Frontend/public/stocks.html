@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Prices</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stock Prices</h1>
+    <table id="stockTable">
+        <thead>
+            <tr>
+                <th>Stock Symbol</th>
+                <th>Current Price</th>
+                <th>High</th>
+                <th>Low</th>
+                <th>Open</th>
+                <th>Close</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% stocks.forEach(stock => { %>
+                <tr>
+                    <td><%= stock.symbol %></td>
+                    <td><%= stock.currentPrice %></td>
+                    <td><%= stock.high %></td>
+                    <td><%= stock.low %></td>
+                    <td><%= stock.open %></td>
+                    <td><%= stock.close %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>
+

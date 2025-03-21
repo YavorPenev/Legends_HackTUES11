@@ -30,14 +30,20 @@
                 return;
             }
 
-            const response = await fetch('http://localhost:3000/evaluate-investment', {
+            // Replace with your correct backend URL
+            const response = await fetch('http://localhost:8000/investments', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ investment: parseFloat(investment), expected_return: parseFloat(expectedReturn) })
+                body: JSON.stringify({
+                    income: parseFloat(investment),  // Assuming 'investment' represents income here
+                    expenses: parseFloat(expectedReturn),  // Assuming 'expectedReturn' represents expenses here
+                    goals: ["Maximize growth"],  // Add more goals as needed
+                    stocks: ["AAPL", "GOOG", "AMZN"]  // Add the stock symbols you want to analyze
+                })
             });
 
             const data = await response.json();
-            resultDiv.innerHTML = `Investment Status: <strong>${data.evaluation}</strong>`;
+            resultDiv.innerHTML = `Investment Status: <strong>${data.advice}</strong>`;
         }
     </script>
 

@@ -13,7 +13,6 @@ const FINNHUB_API_KEY = process.env.FINNHUB_API_KEY;
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
-console.log("OpenAI API Key:", process.env.OPENAI_API_KEY);
 
 const router = express.Router();
 
@@ -57,7 +56,6 @@ router.get("/", (req, res) => {
 router.get("/signup", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "Frontend", "public", "signup.html"));
 });
-
 
 
 // Генериране на JWT токен
@@ -259,9 +257,51 @@ router.post("/login", async (req, res) => {
     }
 });
 
+router.get('/investments', (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "investments.html"), (err) => {
+        if (err) {
+            console.error("Error loading investments.html:", err);
+            res.status(500).json({ error: "Internal Server Error: Unable to load investments.html" });
+        }
+    });
+});
+
+router.post('/investments', async (req, res) => {
+    const { income, expenses, goals, stocks } = req.body;
+
+    // Validate input data
+    if (!income || !expenses || !goals || !stocks) {
+        return res.status(400).json({ error: "All fields are required." });
+    }
+
+    try {
+        // Fetch stock data for the given stock symbols
+        const stockDataPromises = stocks.map(symbol => getStockData(symbol)); 
+        const stockData = await Promise.all(stockDataPromises);
+
+        // Generate advice based on stock data and user profile
+        const advice = stockData.map(stock => {
+            const futureInvestmentPotential = income - expenses;
+
+            // Basic investment analysis logic
+            if (futureInvestmentPotential < 0) {
+                return `Investment in ${stock.symbol} is not advisable based on your current financial situation.`;
+            }
+
+            if (stock.currentPrice > 100) {
+                return `Investment in ${stock.symbol} is advisable if you aim for high-growth stocks.`;
+            } else {
+                return `Investment in ${stock.symbol} could be good if you're looking for stable but lower returns.`;
+            }
+        }).join("\n");
+
+        // Send the advice back as JSON response
+        res.json({ advice });
+    } catch (err) {
+        console.error("Error evaluating investment:", err.message);
+        res.status(500).json({ error: "Internal server error." });
+    }
+});
+
+
 module.exports = router;
-
-
-
-
-
