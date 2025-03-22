@@ -1,13 +1,203 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="./src/main.jsx"></script>
-  </body>
+    <title>Loan Calculator</title>
+    <script type="module" src="src/network/index.jsx"></script>
+    <link href="src/styles/index.css" rel="stylesheet" />
+    <link href="src/styles/themestyles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="element">
+        <div class="header-left">
+            <!-- Бутон за отваряне на менюто -->
+            <button id="menu-button" class="element_buttons" onclick="toggleMenu()">☰&nbsp;Menu</button>
+
+            <!-- Страничното меню -->
+            <div class="element" id="side-menu">
+                <button class="close-button" id="closebutton" onclick="toggleMenu()">✖</button>
+                <div class="menu-content">
+                    <button class="menu-item element_buttons" onclick=""><a href="calculator.html" id="buttonlink">Loan
+                            Calculator</a></button>
+                    <button class="menu-item element_buttons">About Us</button>
+                    <button class="menu-item element_buttons">My Portfolio</button>
+                    <button class="menu-item element_buttons">Contacts</button>
+                </div>
+            </div>
+
+            <script>
+                function toggleMenu() {
+                    const menu = document.getElementById("side-menu");
+                    if (menu.classList.contains("open")) {
+                        menu.classList.remove("open"); // Hide the menu
+                    } else {
+                        menu.classList.add("open"); // Show the menu
+                    }
+                }
+            </script>
+
+            <div id="rootmain"></div>
+
+            <div class="logo">
+                <img alt="Logo" src="logo.png">
+            </div>
+        </div>
+
+        <!-- Дясна част: Бутони -->
+        <div class="header-right">
+            <button class="element_buttons" id="contactsbuttons" onclick="openPopup()">Contacts</button>
+            <button type="button" class="element_buttons" id="login">Login</button>
+            <button type="button" class="element_buttons" id="signup">Signup</button>
+
+            <!-- Основен бутон за отваряне на изскачащия прозорец -->
+
+            <!-- Изскачащ прозорец -->
+            <div class="popup-overlay" id="popup-overlay"></div>
+            <div class="popup" id="popup">
+                <button onclick="closePopup()">✖</button>
+                <h2>Contacts</h2>
+                <p>These are some contacts</p>
+            </div>
+
+            <script>
+                function openPopup() {
+                    document.getElementById('popup').style.display = 'block';
+                    document.getElementById('popup-overlay').style.display = 'block';
+                }
+
+                function closePopup() {
+                    document.getElementById('popup').style.display = 'none';
+                    document.getElementById('popup-overlay').style.display = 'none';
+                }
+            </script>
+
+            <button id="profilebutton" class="element_buttons"><img id="profilepic" src="proficon.png" /></button>
+
+        </div>
+    </header>
+
+    <a class="element_buttons" id="aibutton">AI</a>
+
+    <div class="element" id="carousel-box"></div>
+
+    <button href="http://localhost:8000/advice">Advice</button>
+
+    <section class="features">
+        <h2>Why Choose Us?</h2>
+        <div id="feature-grid">
+            <div class="element" id="feature-card">
+                <h3>Calculate Your Finances</h3>
+                <p>Use our advanced tools to calculate your income, expenses, and savings effortlessly.</p>
+                <a href="../calculator.html" class="element_buttons" id="feature-button">Try Calculator</a>
+            </div>
+
+            <div class="element" id="feature-card">
+                <h3>Get Personalized Advice</h3>
+                <p>Receive expert financial advice tailored to your unique situation and goals.</p>
+                <a href="../portfolio.html" class="element_buttons" id="feature-button">Get Advice</a>
+            </div>
+
+
+            <div class="element" id="feature-card">
+                <h3>Plan Your Budget</h3>
+                <p>Create and manage a budget that works for you, with tips to optimize your spending.</p>
+                <a href="#budget-planning" class="element_buttons" id="feature-button">Start Planning</a>
+            </div>
+
+
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="cont">
+            <div class="content">
+                <a class="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
+                    <img class="image" src="/images.jfif" alt="1">
+                </a>
+                <div class="main-text" id="main-text">
+                    <h1>Budgeting: The Path to Smarter Financial Decisions</h1>
+                    <p>Budgeting is not just a tool for managing finances – it is a way of life that helps you achieve
+                        financial stability and make more informed decisions. In a world of rapid changes and
+                        unpredictable economic conditions, budgeting is your best ally for gaining control over your
+                        money and achieving long-term goals. Here’s how you can use budgeting to make smarter financial
+                        choices and improve your quality of life.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="cont">
+            <div class="content">
+                <a class="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
+                    <img class="image" src="/images3.webp" alt="1">
+                </a>
+                <div class="main-text" id="main-text">
+                    <h1>Debt Management</h1>
+                    <p>Debt is a common part of modern life, but if not managed properly, it can lead to serious
+                        financial problems. Whether it’s credit cards, loans, or mortgages, having a clear strategy
+                        for
+                        managing debt is crucial. Here’s how you can take control of your finances and work towards
+                        becoming debt-free.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="cont">
+            <div class="content">
+                <a class="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
+                    <img class="image" src="/images2.jfif" alt="1">
+                </a>
+                <div class="main-text" id="main-text">
+                    <h1>How to Build a Savings Strategy</h1>
+                    <p>A savings strategy is one of the most important elements of personal financial planning. It not
+                        only helps you handle unexpected expenses but also enables you to achieve long-term financial
+                        goals, such as buying a home, retiring comfortably, or realizing your dreams. Here’s how you can
+                        build an effective savings strategy that will help you live with greater confidence and peace of
+                        mind.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About the Website</h3>
+                <p>This is <b>the</b> website for business insight and the path to success.</p>
+                <p>Here you can find various tools to enhance your entrepreneurial skills.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Navigation</h3>
+                <a href="#">Home</a>
+                <a href="#">Contacts</a>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="FAQ.html">FAQ</a>
+                <a href="calculator.html">Calculator</a>
+                <a href="aboutus.html">About Us</a>
+            </div>
+            <div class="footer-column contact-info">
+                <h3>Contact Information</h3>
+                <p><strong>Address:</strong> Sofia, Bulgaria</p>
+                <p><strong>Phone:</strong> +359 88 123 4567</p>
+                <p><strong>Email:</strong> yavorpen@gmail.com</p>
+            </div>
+        </div>
+        <h3 style="text-align: center;">Copyright © 2025, All Rights Reserved | Designed By <a
+                style=" color: rgb(207, 207, 207);" href="aboutus.html">Legends Team</a></h3>
+    </footer>
+</body>
+
 </html>
