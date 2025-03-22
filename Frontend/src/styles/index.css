@@ -28,12 +28,12 @@ body {
 #side-menu {
     position: fixed;
     top: 0;
-    left: -258px; /* Hidden by default */
+    left: -258px; /* Change to left */
     width: 250px;
     height: 100%;
     background-color: white; /* Ensure it has a visible background */
     color: white;
-    transition: left 0.3s ease; /* Smooth sliding effect */
+    transition: left 0.3s ease; /* Change to left */
     z-index: 1000;
     box-shadow: 10px 0px 5px rgba(0, 0, 0, 0.325);
     display: flex; /* Ensure it is visible when toggled */
@@ -41,7 +41,7 @@ body {
 }
 
 #side-menu.open {
-    left: 0; /* Slide into view */
+    left: 0; /* Change to left */
 }
 
 #buttonlink {
@@ -89,6 +89,7 @@ body {
 /* Бутоните в менюто */
 .menu-item {
     display: block;
+    text-decoration: none;
     background: none;
     border: none;
     color: white;
@@ -107,6 +108,8 @@ body {
 }
 
 header {
+    background-color: #333; /* Change header background color */
+    color: white; /* Change header text color */
     position: fixed;
     top: 0;
     left: 0;

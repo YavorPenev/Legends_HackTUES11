@@ -7,6 +7,8 @@ const axios = require("axios");
 const nodemailer = require("nodemailer");
 const { OpenAI } = require("openai");
 const session = require("express-session");
+const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");
 
 const FINNHUB_API_KEY = process.env.FINNHUB_API_KEY;
 const openai = new OpenAI({
@@ -40,6 +42,9 @@ router.use(
     })
 );
 
+// Add body-parser middleware
+router.use(bodyParser.json());
+
 function authenticateSession(req, res, next) {
     if (!req.session.user) {
         return res.status(401).json({ error: "Unauthorized: No session found" });
@@ -63,6 +68,11 @@ router.get("/signup", (req, res) => {
 
 router.get("/login", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "Frontend", "public", "login.html"));
+});
+
+// Add route for Credit Calculator page
+router.get("/credit-calculator", authenticateSession, (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "Frontend", "public", "credit-calculator.html"));
 });
 
 // Transporter setup for nodemailer
@@ -200,6 +210,7 @@ router.post("/signup", async (req, res) => {
         const sql = "INSERT INTO users (user_name, password, email, is_verified) VALUES (?, ?, ?, 0)";
         db.query(sql, [username, hashedPassword, email], async (err, result) => {
             if (err) {
+                console.error("Database error:", err); // Log the error for debugging
                 return res.status(500).json({ error: "Database error occurred." });
             }
             // Generate verification token
@@ -217,10 +228,12 @@ router.post("/signup", async (req, res) => {
                 await transporter.sendMail(mailOptions);
                 res.status(200).json({ message: "Signup successful! Verification email sent." });
             } catch (error) {
+                console.error("Error sending email:", error); // Log the error for debugging
                 res.status(500).json({ error: "Signup successful, but email could not be sent." });
             }
         });
     } catch (err) {
+        console.error("Error during signup:", err); // Log the error for debugging
         res.status(500).json({ error: "An error occurred. Please try again." });
     }
 });

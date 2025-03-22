@@ -1,9 +1,9 @@
 document.getElementById('signup-btn').addEventListener('click', async () => {
+    const email = document.getElementById('email').value;
     const username = document.getElementById('user_name').value;
     const password = document.getElementById('password').value;
-    const email = document.getElementById('email').value;
 
-    if (!username || !password) {
+    if (!email || !username || !password) {
         alert('Please fill in all fields');
         return;
     }
@@ -14,7 +14,7 @@ document.getElementById('signup-btn').addEventListener('click', async () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ username, password, email }),
+            body: JSON.stringify({ email, username, password }),
         });
 
         const result = await response.json();

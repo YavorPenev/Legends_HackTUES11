@@ -8,6 +8,73 @@
     <script type="module" src="src/network/index.jsx"></script>
     <link href="src/styles/index.css" rel="stylesheet" />
     <link href="src/styles/themestyles.css" rel="stylesheet" />
+    <style>
+        .menu-button {
+            position: fixed;
+            left: 10px;
+            top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #333;
+            color: white;
+            padding-top: 20px;
+            transition: left 0.3s ease-in-out;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .menu-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .menu-item {
+            background-color: #555;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .menu-item:hover {
+            background-color: #777;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,19 +89,19 @@
                 <div class="menu-content">
                     <button class="menu-item element_buttons" onclick=""><a href="calculator.html" id="buttonlink">Loan
                             Calculator</a></button>
-                    <button class="menu-item element_buttons">About Us</button>
-                    <button class="menu-item element_buttons">My Portfolio</button>
-                    <button class="menu-item element_buttons">Contacts</button>
+                    <button class="menu-item element_buttons">Credit calculator</button>
+                    <button class="menu-item element_buttons">TOP companies</button>
+                    <button class="menu-item element_buttons">Currency courses </button>
                 </div>
             </div>
 
             <script>
                 function toggleMenu() {
                     const menu = document.getElementById("side-menu");
-                    if (menu.classList.contains("open")) {
-                        menu.classList.remove("open"); // Hide the menu
+                    if (menu.style.left === "0px") {
+                        menu.style.left = "-250px";
                     } else {
-                        menu.classList.add("open"); // Show the menu
+                        menu.style.left = "0px";
                     }
                 }
             </script>
@@ -165,7 +232,29 @@
         </div>
     </div>
 
+    <button class="menu-button" onclick="toggleMenu()">☰ Menu</button>
 
+    <div id="sideMenu" class="side-menu">
+        <button class="close-button" onclick="toggleMenu()">✖</button>
+        <div class="menu-content">
+            <a href="/credit-calculator" class="menu-item">Credit calculator</a>
+            <button class="menu-item">Currency courses</button>
+            <a href="src/TOP_companies.html" class="menu-item">TOP companies</a>
+            <a href="public/zakoni.html" class="menu-item">Financial law</a>
+          
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("sideMenu");
+            if (menu.style.left === "0px") {
+                menu.style.left = "-250px";
+            } else {
+                menu.style.left = "0px";
+            }
+        }
+    </script>
 
     <footer>
         <div class="footer-container">
