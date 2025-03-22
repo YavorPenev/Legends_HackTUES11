@@ -17,7 +17,7 @@ const openai = new OpenAI({
 const router = express.Router();
 
 //Connection with our database
-const db = mysql.createConnection({
+const db = mysql.createConnection({//db
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
