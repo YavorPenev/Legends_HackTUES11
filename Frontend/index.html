@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loan Calculator</title>
-    <script type="module" src="src/network/index.jsx"></script>
+    <script type="module" src="/src/main.jsx"></script>
     <link href="src/styles/index.css" rel="stylesheet" />
     <link href="src/styles/themestyles.css" rel="stylesheet" />
     <style>
@@ -109,15 +109,15 @@
             <div id="rootmain"></div>
 
             <div class="logo">
-                <img alt="Logo" src="logo.png">
+                <img alt="Logo" src="src/photos/logo.png">
             </div>
         </div>
 
 
         <div class="header-right">
             <button class="element_buttons" id="contactsbuttons" onclick="openPopup()">Contacts</button>
-            <button type="button" class="element_buttons" id="login">Login</button>
-            <button type="button" class="element_buttons" id="signup">Signup</button>
+            <button type="button" class="element_buttons" id="login" onclick="openLoginForm()">Login</button>
+            <button type="button" class="element_buttons" id="signup" onclick="openSignupForm()">Signup</button>
 
          
 
@@ -139,9 +139,17 @@
                     document.getElementById('popup').style.display = 'none';
                     document.getElementById('popup-overlay').style.display = 'none';
                 }
+
+                function openLoginForm() {
+                    window.location.href = "/login";
+                }
+
+                function openSignupForm() {
+                    window.location.href = "/signup";
+                }
             </script>
 
-            <button id="profilebutton" class="element_buttons"><img id="profilepic" src="proficon.png" /></button>
+            <button id="profilebutton" class="element_buttons"><img id="profilepic" src="src/photos/proficon.png" /></button>
 
         </div>
     </header>
@@ -150,7 +158,61 @@
 
     <div class="element" id="carousel-box"></div>
 
-    <button href="http://localhost:8000/advice">Advice</button>
+   
+
+    <div class="container">
+        <div class="cont">
+            <div class="content">
+                <a class="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
+                    <img class="image" src="src/photos/images.jfif" alt="1">
+                </a>
+                <div class="main-text" id="main-text">
+                    <h1>Budgeting: The Path to Smarter Financial Decisions</h1>
+                    <p>Budgeting is not just a tool for managing finances – it is a way of life that helps you achieve
+                        financial stability and make more informed decisions. In a world of rapid changes and
+                        unpredictable economic conditions, budgeting is your best ally for gaining control over your
+                        money and achieving long-term goals. Here’s how you can use budgeting to make smarter financial
+                        choices and improve your quality of life.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="cont">
+            <div class="content">
+                <a class="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
+                    <img class="image" src="src/photos/images3.webp" alt="1">
+                </a>
+                <div class="main-text" id="main-text">
+                    <h1>Debt Management</h1>
+                    <p>Debt is a common part of modern life, but if not managed properly, it can lead to serious
+                        financial problems. Whether it’s credit cards, loans, or mortgages, having a clear strategy
+                        for
+                        managing debt is crucial. Here’s how you can take control of your finances and work towards
+                        becoming debt-free.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="cont">
+            <div class="content">
+                <a class="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
+                    <img class="image" src="src/photos/images2.jfif" alt="1">
+                </a>
+                <div class="main-text" id="main-text">
+                    <h1>How to Build a Savings Strategy</h1>
+                    <p>A savings strategy is one of the most important elements of personal financial planning. It not
+                        only helps you handle unexpected expenses but also enables you to achieve long-term financial
+                        goals, such as buying a home, retiring comfortably, or realizing your dreams. Here’s how you can
+                        build an effective savings strategy that will help you live with greater confidence and peace of
+                        mind.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <section class="features">
         <h2>Why Choose Us?</h2>
@@ -178,67 +240,13 @@
         </div>
     </section>
 
-    <div class="container">
-        <div class="cont">
-            <div class="content">
-                <a class="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
-                    <img class="image" src="/images.jfif" alt="1">
-                </a>
-                <div class="main-text" id="main-text">
-                    <h1>Budgeting: The Path to Smarter Financial Decisions</h1>
-                    <p>Budgeting is not just a tool for managing finances – it is a way of life that helps you achieve
-                        financial stability and make more informed decisions. In a world of rapid changes and
-                        unpredictable economic conditions, budgeting is your best ally for gaining control over your
-                        money and achieving long-term goals. Here’s how you can use budgeting to make smarter financial
-                        choices and improve your quality of life.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="cont">
-            <div class="content">
-                <a class="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
-                    <img class="image" src="/images3.webp" alt="1">
-                </a>
-                <div class="main-text" id="main-text">
-                    <h1>Debt Management</h1>
-                    <p>Debt is a common part of modern life, but if not managed properly, it can lead to serious
-                        financial problems. Whether it’s credit cards, loans, or mortgages, having a clear strategy
-                        for
-                        managing debt is crucial. Here’s how you can take control of your finances and work towards
-                        becoming debt-free.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="cont">
-            <div class="content">
-                <a class="image-box" href="https://www.getsmarteraboutmoney.ca/learning-path/budgeting/">
-                    <img class="image" src="/images2.jfif" alt="1">
-                </a>
-                <div class="main-text" id="main-text">
-                    <h1>How to Build a Savings Strategy</h1>
-                    <p>A savings strategy is one of the most important elements of personal financial planning. It not
-                        only helps you handle unexpected expenses but also enables you to achieve long-term financial
-                        goals, such as buying a home, retiring comfortably, or realizing your dreams. Here’s how you can
-                        build an effective savings strategy that will help you live with greater confidence and peace of
-                        mind.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <button class="menu-button" onclick="toggleMenu()">☰ Menu</button>
 
     <div id="sideMenu" class="side-menu">
         <button class="close-button" onclick="toggleMenu()">✖</button>
         <div class="menu-content">
             <a href="/credit-calculator" class="menu-item">Credit calculator</a>
-            <button class="menu-item">Currency courses</button>
+            <a href="/courses" class="menu-item">Currency courses</a>
             <a href="src/TOP_companies.html" class="menu-item">TOP companies</a>
             <a href="public/zakoni.html" class="menu-item">Financial law</a>
           
@@ -270,15 +278,15 @@
             </div>
             <div class="footer-column">
                 <h3>Quick Links</h3>
-                <a href="FAQ.html">FAQ</a>
+                <a href="public/FAQ.html">FAQ</a>
                 <a href="calculator.html">Calculator</a>
-                <a href="aboutus.html">About Us</a>
+                <a href="public/about.html">About Us</a>
             </div>
             <div class="footer-column contact-info">
                 <h3>Contact Information</h3>
                 <p><strong>Address:</strong> Sofia, Bulgaria</p>
                 <p><strong>Phone:</strong> +359 88 123 4567</p>
-                <p><strong>Email:</strong> yavorpen@gmail.com</p>
+                <p><strong>Email:</strong> legendtues11@gmail.com</p>
             </div>
         </div>
         <h3 style="text-align: center;">Copyright © 2025, All Rights Reserved | Designed By <a

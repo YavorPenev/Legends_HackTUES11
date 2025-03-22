@@ -1,13 +1,17 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-const router = require("./app.js"); 
+const router = require("./app.js");
 
-//app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
+// Middleware to set MIME type for .jsx files
+app.use((req, res, next) => {
+  if (req.url.endsWith('.jsx')) {
+    res.type('application/javascript');
+  }
+  next();
+});
 
 app.use("/src", express.static(path.join(__dirname, "..", "Frontend", "src")));
-
-
 
 app.use(express.json());
 
