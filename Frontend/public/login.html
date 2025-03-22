@@ -8,7 +8,21 @@
     <script src="https://kit.fontawesome.com/eb00f32ec1.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="root"></div>
-    <script type="module" src="../src/network/login.jsx"></script>
+    <div class="input-box">
+        <h1>Login:</h1>
+    
+        <div class="info">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="user_name" placeholder="Enter your username">
+        </div>
+        <div class="info">
+            <i class="fa-solid fa-user"></i>
+            <input type="password" id="password" placeholder="Enter user password">
+        </div>
+        <div class="submit-btn">
+            <button type="button" id="login-btn">login</button>
+        </div>
+    </div>
+    <script type="module" src="../src/javascript/login.js"></script>
 </body>
 </html>
