@@ -267,4 +267,46 @@ router.post("/logout", (req, res) => {
     });
 });
 
+router.get("/analyze-investment", authenticateSession, async(req,res) =>{
+    res.sendFile("..", "Frontend", "public", "investments.html");
+})
+
+router.post("/analyze-investment", authenticateSession, async (req, res) => {
+    const { symbols } = req.body;
+
+    if (!symbols || !Array.isArray(symbols) || symbols.length === 0) {
+        return res.status(400).json({ error: "Please provide valid stock symbols." });
+    }
+
+    try {
+        const stockDataPromises = symbols.map(symbol => getStockData(symbol.trim().toUpperCase()));
+        const stockData = await Promise.all(stockDataPromises);
+        const filteredStockData = stockData.filter(data => data !== null);
+
+        const prompt = `
+        Based on the following stock data:
+
+        ${filteredStockData.map(data => `
+        Stock: ${data.symbol}
+        Current Price: ${data.currentPrice}
+        High: ${data.high}
+        Low: ${data.low}
+        Open: ${data.open}
+        Close: ${data.close}`).join("\n")}
+
+        Provide a detailed analysis of whether these stocks are good investments for the future, considering trends and financial stability.
+        `;
+
+        const response = await openai.chat.completions.create({
+            model: "gpt-4",
+            messages: [{ role: "user", content: prompt }],
+        });
+
+        res.status(200).json({ advice: response.choices[0].message.content });
+    } catch (err) {
+        console.error("Error analyzing investments:", err.message);
+        res.status(500).json({ error: "Internal server error." });
+    }
+});
+
 module.exports = router;
