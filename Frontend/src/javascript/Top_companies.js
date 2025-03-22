@@ -5,4 +5,5 @@ function changeSlide(step) {
     index = (index + step + slides.length) % slides.length;
     document.querySelector(".carousel-inner").style.transform = `translateX(-${index * 100}%)`;
 }
+
 setInterval(() => changeSlide(1), 3000);

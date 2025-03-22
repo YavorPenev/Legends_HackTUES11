@@ -9,6 +9,7 @@ const { OpenAI } = require("openai");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
+const cors = require('cors');
 
 const FINNHUB_API_KEY = process.env.FINNHUB_API_KEY;
 const openai = new OpenAI({
@@ -238,6 +239,27 @@ router.post("/signup", async (req, res) => {
     }
 });
 
+router.get("/verify-email", async (req, res) => {
+    const { token } = req.query;
+    if (!token) {
+        return res.status(400).json({ error: "Verification token is required." });
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const sql = "UPDATE users SET is_verified = 1 WHERE email = ?";
+        db.query(sql, [decoded.email], (err, result) => {
+            if (err) {
+                console.error("Database error:", err); // Log the error for debugging
+                return res.status(500).json({ error: "Database error occurred." });
+            }
+            res.status(200).send("Email verified successfully!");
+        });
+    } catch (err) {
+        console.error("Error verifying email:", err); // Log the error for debugging
+        res.status(500).json({ error: "Invalid or expired token." });
+    }
+});
+
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
 
@@ -320,6 +342,21 @@ router.post("/analyze-investment", authenticateSession, async (req, res) => {
         console.error("Error analyzing investments:", err.message);
         res.status(500).json({ error: "Internal server error." });
     }
+});
+
+router.get("/api/forex-rates", authenticateSession, async (req, res) => {
+  try {
+    const response = await axios.get("https://api.exchangerate-api.com/v4/latest/USD");
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error fetching forex rates:", error.message);
+    res.status(500).json({ error: "Error fetching forex rates." });
+  }
+});
+
+// Ensure only logged-in users can access the courses page
+router.get("/courses", authenticateSession, (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "Frontend", "public", "courses.html"));
 });
 
 module.exports = router;
